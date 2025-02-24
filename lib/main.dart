@@ -1,5 +1,4 @@
-import 'dart:convert';
-
+//import 'dart:convert';
 
 import 'dart:async';
 import 'screens/bluetooth_off_screen.dart';
@@ -12,26 +11,22 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 //void main() => runApp(const MyApp());
 
-
-
-
 void main() {
   FlutterBluePlus.setLogLevel(LogLevel.verbose, color: true);
-  runApp(const FlutterBlueApp());
+  runApp(const MyApp());
 }
-
 
 // This widget shows BluetoothOffScreen or
 // ScanScreen depending on the adapter state
 //
-class FlutterBlueApp extends StatefulWidget {
-  const FlutterBlueApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
-  State<FlutterBlueApp> createState() => _FlutterBlueAppState();
+  State<MyApp> createState() => _FlutterBlueAppState();
 }
 
-class _FlutterBlueAppState extends State<FlutterBlueApp> {
+class _FlutterBlueAppState extends State<MyApp> {
   BluetoothAdapterState _adapterState = BluetoothAdapterState.unknown;
 
   late StreamSubscription<BluetoothAdapterState> _adapterStateStateSubscription;
@@ -39,7 +34,8 @@ class _FlutterBlueAppState extends State<FlutterBlueApp> {
   @override
   void initState() {
     super.initState();
-    _adapterStateStateSubscription = FlutterBluePlus.adapterState.listen((state) {
+    _adapterStateStateSubscription =
+        FlutterBluePlus.adapterState.listen((state) {
       _adapterState = state;
       if (mounted) {
         setState(() {});
@@ -78,7 +74,8 @@ class BluetoothAdapterStateObserver extends NavigatorObserver {
     super.didPush(route, previousRoute);
     if (route.settings.name == '/DeviceScreen') {
       // Start listening to Bluetooth state changes when a new route is pushed
-      _adapterStateSubscription ??= FlutterBluePlus.adapterState.listen((state) {
+      _adapterStateSubscription ??=
+          FlutterBluePlus.adapterState.listen((state) {
         if (state != BluetoothAdapterState.on) {
           // Pop the current route if Bluetooth is off
           navigator?.pop();
