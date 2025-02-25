@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'screens/bluetooth_off_screen.dart';
 import 'screens/scan_screen.dart';
+import '3d_render.dart';
 // import 'package:english_words/english_words.dart';
 // import 'package:provider/provider.dart';
 
@@ -67,6 +68,15 @@ class _FlutterBlueAppState extends State<MyApp> {
               Image.asset('assets/images/firevision.jpg',
                   height: 200, scale: 2),
               Expanded(child: screen),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const Render(title: 'FireVision')));
+                  },
+                  child: const Text('3D Render')),
             ],
           ),
         ),
