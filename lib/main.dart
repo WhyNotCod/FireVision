@@ -3,6 +3,8 @@
 import 'dart:async';
 import 'screens/bluetooth_off_screen.dart';
 import 'screens/scan_screen.dart';
+// import 'package:english_words/english_words.dart';
+// import 'package:provider/provider.dart';
 
 import 'package:flutter/material.dart';
 //import 'package:flutter/services.dart';
@@ -56,8 +58,19 @@ class _FlutterBlueAppState extends State<MyApp> {
         : BluetoothOffScreen(adapterState: _adapterState);
 
     return MaterialApp(
-      color: Colors.lightBlue,
-      home: screen,
+      color: const Color.fromARGB(255, 190, 98, 12),
+      title: 'FireVision',
+      home: Scaffold(
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              Image.asset('assets/images/firevision.jpg',
+                  height: 200, scale: 2),
+              Expanded(child: screen),
+            ],
+          ),
+        ),
+      ),
       navigatorObservers: [BluetoothAdapterStateObserver()],
     );
   }
