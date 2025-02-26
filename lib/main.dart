@@ -71,7 +71,7 @@ class _FlutterBlueAppState extends State<MyApp> {
               ElevatedButton(
                 child: const Text('3D Render'),
                 onPressed: () {
-                  print("Button Pressed");
+                  //print("Button Pressed");
                   Navigator.push(
                       context,
                       MaterialPageRoute(
