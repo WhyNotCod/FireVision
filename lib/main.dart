@@ -65,8 +65,7 @@ class _FlutterBlueAppState extends State<MyApp> {
         body: Center(
           child: Column(
             children: <Widget>[
-              Image.asset('assets/images/firevision.jpg',
-                  height: 200, scale: 2),
+              Image.asset('assets/images/fire-icon.jpg', height: 200, scale: 2),
               Expanded(child: screen),
               ElevatedButton(
                   onPressed: () {
