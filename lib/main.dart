@@ -65,17 +65,19 @@ class _FlutterBlueAppState extends State<MyApp> {
         body: Center(
           child: Column(
             children: <Widget>[
-              Image.asset('assets/images/fire-icon.jpg', height: 200, scale: 2),
+              Image.asset('assets/images/fireicon.jpg', height: 200, scale: 2),
               Expanded(child: screen),
               ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const Render(title: 'FireVision')));
-                  },
-                  child: const Text('3D Render')),
+                child: const Text('3D Render'),
+                onPressed: () {
+                  print("Button Pressed");
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const Render(title: 'FireVision')));
+                },
+              )
             ],
           ),
         ),

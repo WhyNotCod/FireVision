@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cube/flutter_cube.dart';
 
 class Render extends StatefulWidget {
-  const Render({Key? key, this.title}) : super(key: key);
+  const Render({super.key, this.title});
 
   final String? title;
 
@@ -38,8 +38,7 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(microseconds: 30000),
-      vsync: this)
+        duration: const Duration(microseconds: 30000), vsync: this)
       ..addListener(() {
         if (_cube != null) {
           _cube!.rotation.y = _controller.value * 360;
@@ -47,7 +46,7 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
           _scene.update();
         }
       })
-    ..repeat();
+      ..repeat();
   }
 
   @override
@@ -59,21 +58,37 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(centerTitle: true, title: Text(widget.title!),),
-      body: Center(
-        child: GestureDetector(
-          onPanUpdate: (details) {
-            if (_cube != null) {
-              _cube!.rotation.x += details.delta.dy / 100;
-              _cube!.rotation.y += details.delta.dx / 100;
-              _cube!.updateTransform();
-              _scene.update();
-            }
-          },
-          child: Cube(onSceneCreated: _onSceneCreated),
-        ),
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(widget.title!),
       ),
-      
+      body: Stack(
+        children: [
+          Center(
+            child: GestureDetector(
+              onPanUpdate: (details) {
+                if (_cube != null) {
+                  _cube!.rotation.x += details.delta.dy / 100;
+                  _cube!.rotation.y += details.delta.dx / 100;
+                  _cube!.updateTransform();
+                  _scene.update();
+                }
+              },
+              child: Cube(onSceneCreated: _onSceneCreated),
+            ),
+          ),
+          Positioned(
+            bottom: 20,
+            right: 20,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Back'),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
