@@ -68,6 +68,7 @@ class _FlutterBlueAppState extends State<MyApp> {
               children: <Widget>[
                 Image.asset('assets/images/icons8-fire-100.png',
                     height: 200, scale: 2),
+                Expanded(child: screen),
                 ElevatedButton(
                   child: const Text('3D Render'),
                   onPressed: () {
@@ -80,7 +81,6 @@ class _FlutterBlueAppState extends State<MyApp> {
                     );
                   },
                 ),
-                Expanded(child: screen),
               ],
             ),
           ),
