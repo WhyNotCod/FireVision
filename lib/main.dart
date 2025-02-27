@@ -3,7 +3,7 @@
 import 'dart:async';
 import 'screens/bluetooth_off_screen.dart';
 import 'screens/scan_screen.dart';
-import '3d_render.dart';
+import 'package:fire_vision/3d_render.dart';
 // import 'package:english_words/english_words.dart';
 // import 'package:provider/provider.dart';
 
@@ -65,20 +65,19 @@ class _FlutterBlueAppState extends State<MyApp> {
         body: Center(
           child: Column(
             children: <Widget>[
-              OutlinedButton(
+              Image.asset('assets/images/icons8-fire-100.png',
+                  height: 200, scale: 2),
+              Expanded(child: screen),
+              ElevatedButton(
                 child: const Text('3D Render'),
                 onPressed: () {
-                  //print("Button Pressed");
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
                               const Render(title: 'FireVision')));
                 },
-              ),
-              Image.asset('assets/images/icons8-fire-100.png',
-                  height: 200, scale: 2),
-              Expanded(child: screen),
+              )
             ],
           ),
         ),
