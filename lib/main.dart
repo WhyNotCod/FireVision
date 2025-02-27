@@ -60,7 +60,7 @@ class _FlutterBlueAppState extends State<MyApp> {
 
     return MaterialApp(
       color: const Color.fromARGB(255, 190, 98, 12),
-      title: 'FireVision',
+      title: 'FireVisions',
       home: Scaffold(
         body: Center(
           child: Column(
