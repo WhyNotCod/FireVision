@@ -23,7 +23,7 @@ void main() {
 // ScanScreen depending on the adapter state
 //
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _FlutterBlueAppState();
@@ -65,10 +65,7 @@ class _FlutterBlueAppState extends State<MyApp> {
         body: Center(
           child: Column(
             children: <Widget>[
-              Image.asset('assets/images/icons8-fire-100.png',
-                  height: 200, scale: 2),
-              Expanded(child: screen),
-              ElevatedButton(
+              OutlinedButton(
                 child: const Text('3D Render'),
                 onPressed: () {
                   //print("Button Pressed");
@@ -78,8 +75,13 @@ class _FlutterBlueAppState extends State<MyApp> {
                           builder: (context) =>
                               const Render(title: 'FireVision')));
                 },
-              )
+              ),
+              Image.asset('assets/images/icons8-fire-100.png',
+                  height: 200, scale: 2),
+              Expanded(child: screen),
             ],
+          ),
+            
           ),
         ),
       ),
