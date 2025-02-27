@@ -81,8 +81,6 @@ class _FlutterBlueAppState extends State<MyApp> {
               Expanded(child: screen),
             ],
           ),
-            
-          ),
         ),
       ),
       navigatorObservers: [BluetoothAdapterStateObserver()],
