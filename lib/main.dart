@@ -71,11 +71,14 @@ class _FlutterBlueAppState extends State<MyApp> {
               ElevatedButton(
                 child: const Text('3D Render'),
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const Render(title: 'FireVision')));
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      print('Navigating to Render');
+                      //settings: RouteSettings(name: '/Render');
+                      Navigator.pushNamed(context, '/Render');
+                      return Render(title: 'FireVision');
+                    },
+                  ));
                 },
               )
             ],
