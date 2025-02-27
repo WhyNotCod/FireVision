@@ -7,10 +7,10 @@ class Render extends StatefulWidget {
   final String? title;
 
   @override
-  State<Render> createState() => _RenderState();
+  State<Render> createState() => RenderState();
 }
 
-class _RenderState extends State<Render> {
+class RenderState extends State<Render> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

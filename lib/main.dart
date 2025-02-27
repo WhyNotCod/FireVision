@@ -74,7 +74,7 @@ class _FlutterBlueAppState extends State<MyApp> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const Render(title: 'FireVision'),
+                      builder: (context) => Render(title: 'FireVision'),
                     ),
                   );
                 },
