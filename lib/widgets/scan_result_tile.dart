@@ -82,7 +82,7 @@ class _ScanResultTileState extends State<ScanResultTile> {
       child: isConnected ? const Text('OPEN') : const Text('CONNECT'),
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
+        foregroundColor: Colors.white,  
       ),
       onPressed: (widget.result.advertisementData.connectable) ? widget.onTap : null,
     );

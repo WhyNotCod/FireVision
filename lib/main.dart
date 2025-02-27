@@ -67,20 +67,19 @@ class _FlutterBlueAppState extends State<MyApp> {
             children: <Widget>[
               Image.asset('assets/images/icons8-fire-100.png',
                   height: 200, scale: 2),
-              Expanded(child: screen),
               ElevatedButton(
                 child: const Text('3D Render'),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      print('Navigating to Render');
-                      //settings: RouteSettings(name: '/Render');
-                      Navigator.pushNamed(context, '/Render');
-                      return Render(title: 'FireVision');
-                    },
-                  ));
+                  //print('Navigating to Render'); // Debugging print statement
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Render(title: 'FireVision'),
+                    ),
+                  );
                 },
-              )
+              ),
+              Expanded(child: screen),
             ],
           ),
         ),
@@ -89,6 +88,8 @@ class _FlutterBlueAppState extends State<MyApp> {
     );
   }
 }
+
+// Removed unused _buildConnectButton function
 
 //
 // This observer listens for Bluetooth Off and dismisses the DeviceScreen
