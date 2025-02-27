@@ -63,26 +63,26 @@ class _FlutterBlueAppState extends State<MyApp> {
       title: 'FireVision',
       home: Scaffold(
         body: Center(
-          child: Column(
-            children: <Widget>[
-              Image.asset('assets/images/icons8-fire-100.png',
-                  height: 200, scale: 2),
-              Expanded(child: screen),
-              ElevatedButton(
-                child: const Text('3D Render'),
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      print('Navigating to Render');
-                      //settings: RouteSettings(name: '/Render');
-                      Navigator.pushNamed(context, '/Render');
-                      return Render(title: 'FireVision');
-                    },
-                  ));
-                },
-              )
-            ],
+          child: ElevatedButton(
+            child: const Text('3D Render'),
+            onPressed: () {
+              //print('Navigating to Render'); // Debugging print statement
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Render(title: 'FireVision'),
+                ),
+              );
+            },
           ),
+          // child: Column(
+          //   children: <Widget>[
+          //     Image.asset('assets/images/icons8-fire-100.png',
+          //         height: 200, scale: 2),
+          //     Expanded(child: screen),
+
+          //   ],
+          // ),
         ),
       ),
       navigatorObservers: [BluetoothAdapterStateObserver()],
