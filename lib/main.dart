@@ -67,18 +67,18 @@ class _FlutterBlueAppState extends State<MyApp> {
             children: <Widget>[
               Image.asset('assets/images/icons8-fire-100.png',
                   height: 200, scale: 2),
-              ElevatedButton(
-                child: const Text('3D Render'),
-                onPressed: () {
-                  //print('Navigating to Render'); // Debugging print statement
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Render(title: 'FireVision'),
-                    ),
-                  );
-                },
-              ),
+              // child: ElevatedButton(
+              //   child: const Text('3D Render'),
+              //   onPressed: () {
+              //     //print('Navigating to Render'); // Debugging print statement
+              //     Navigator.pop(
+              //       context,
+              //       MaterialPageRoute(
+              //         builder: (context) => Render(title: 'FireVision'),
+              //       ),
+              //     );
+              //   },
+              // ),
               Expanded(child: screen),
             ],
           ),
@@ -89,6 +89,30 @@ class _FlutterBlueAppState extends State<MyApp> {
   }
 }
 
+class NavigateButton extends StatelessWidget {
+  final Widget destination;
+
+  const NavigateButton({
+    Key? key,
+    required this.destination,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      child: Text('3D Render'),
+      onPressed: () {
+        //print('Navigating to $title'); // Debugging print statement
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Render(),
+          ),
+        );
+      },
+    );
+  }
+}
 // Removed unused _buildConnectButton function
 
 //
