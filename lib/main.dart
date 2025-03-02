@@ -54,9 +54,9 @@ class _FlutterBlueAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    Widget screen = _adapterState == BluetoothAdapterState.on
-        ? const ScanScreen()
-        : BluetoothOffScreen(adapterState: _adapterState);
+    // Widget screen = _adapterState == BluetoothAdapterState.on
+    //     ? const ScanScreen()
+    //     : BluetoothOffScreen(adapterState: _adapterState);
 
     return MaterialApp(
       color: const Color.fromARGB(255, 190, 98, 12),
@@ -79,7 +79,7 @@ class _FlutterBlueAppState extends State<MyApp> {
                 },
                 child: const Text('3D Render'),
               ),
-              
+
               //Expanded(child: screen),
             ],
           ),
@@ -90,35 +90,6 @@ class _FlutterBlueAppState extends State<MyApp> {
   }
 }
 
-// class NavigateButton extends StatelessWidget {
-//   final Widget destination;
-
-//   const NavigateButton({
-//     Key? key,
-//     required this.destination,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return ElevatedButton(
-//       child: Text('3D Render'),
-//       onPressed: () {
-//         //print('Navigating to $title'); // Debugging print statement
-//         Navigator.push(
-//           context,
-//           MaterialPageRoute(
-//             builder: (context) => Render(),
-//           ),
-//         );
-//       },
-//     );
-//   }
-// }
-// Removed unused _buildConnectButton function
-
-//
-// This observer listens for Bluetooth Off and dismisses the DeviceScreen
-//
 class BluetoothAdapterStateObserver extends NavigatorObserver {
   StreamSubscription<BluetoothAdapterState>? _adapterStateSubscription;
 
