@@ -32,21 +32,6 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
     scene.world.add(_cube!);
   }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _controller = AnimationController(
-  //       duration: const Duration(microseconds: 30000), vsync: this)
-  //     ..addListener(() {
-  //       if (_cube != null) {
-  //         _cube!.rotation.y = _controller.value * 360;
-  //         _cube!.updateTransform();
-  //         _scene.update();
-  //       }
-  //     })
-  //     ..repeat();
-  // }
-
   @override
   void dispose() {
     _controller.dispose();
@@ -90,6 +75,23 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
     );
   }
 }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _controller = AnimationController(
+  //       duration: const Duration(microseconds: 30000), vsync: this)
+  //     ..addListener(() {
+  //       if (_cube != null) {
+  //         _cube!.rotation.y = _controller.value * 360;
+  //         _cube!.updateTransform();
+  //         _scene.update();
+  //       }
+  //     })
+  //     ..repeat();
+  // }
+
+  
 // class Render extends StatefulWidget {
 //   const Render({super.key, this.title});
 
