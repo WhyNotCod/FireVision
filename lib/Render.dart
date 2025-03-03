@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cube/flutter_cube.dart';
 
 class Render extends StatefulWidget {
-   Render({super.key});
+  const Render({super.key});
 
   //final String? title;
 
