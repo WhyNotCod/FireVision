@@ -58,20 +58,19 @@ class _FlutterBlueAppState extends State<MyApp> {
             children: <Widget>[
               Image.asset('assets/images/icons8-fire-100.png',
                   height: 200, scale: 2),
-              Positioned(
-                bottom: 20,
-                right: 20,
-                child: ElevatedButton(
+                ElevatedButton(
                   onPressed: () {
+                    print('Navigating to Render'); // Debugging print statement
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const Render(),
                       ),
+                      
                     );
+                    print('Did it push?');
                   },
                   child: const Text('Back'),
-                ),
               ),
               Expanded(child: screen),
             ],
