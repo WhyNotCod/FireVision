@@ -42,9 +42,9 @@ class _FlutterBlueAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    Widget screen = _adapterState == BluetoothAdapterState.on
-        ? const ScanScreen()
-        : BluetoothOffScreen(adapterState: _adapterState);
+    // Widget screen = _adapterState == BluetoothAdapterState.on
+    //     ? const ScanScreen()
+    //     : BluetoothOffScreen(adapterState: _adapterState);
 
     return MaterialApp(
       color: const Color.fromARGB(255, 190, 98, 12),
@@ -70,42 +70,42 @@ class _FlutterBlueAppState extends State<MyApp> {
                 },
                 child: const Text('3D Render'),
               ),
-              Expanded(child: screen),
+              //Expanded(child: screen),
             ],
           ),
         ),
       ),
-      navigatorObservers: [BluetoothAdapterStateObserver()],
+      //navigatorObservers: [BluetoothAdapterStateObserver()],
     );
   }
 }
 
-class BluetoothAdapterStateObserver extends NavigatorObserver {
-  StreamSubscription<BluetoothAdapterState>? _adapterStateSubscription;
+// class BluetoothAdapterStateObserver extends NavigatorObserver {
+//   StreamSubscription<BluetoothAdapterState>? _adapterStateSubscription;
 
-  @override
-  void didPush(Route route, Route? previousRoute) {
-    super.didPush(route, previousRoute);
-    if (route.settings.name == '/DeviceScreen') {
-      // Start listening to Bluetooth state changes when a new route is pushed
-      _adapterStateSubscription ??=
-          FlutterBluePlus.adapterState.listen((state) {
-        if (state != BluetoothAdapterState.on) {
-          // Pop the current route if Bluetooth is off
-          navigator?.pop();
-        }
-      });
-    }
-  }
+//   @override
+//   void didPush(Route route, Route? previousRoute) {
+//     super.didPush(route, previousRoute);
+//     if (route.settings.name == '/DeviceScreen') {
+//       // Start listening to Bluetooth state changes when a new route is pushed
+//       _adapterStateSubscription ??=
+//           FlutterBluePlus.adapterState.listen((state) {
+//         if (state != BluetoothAdapterState.on) {
+//           // Pop the current route if Bluetooth is off
+//           navigator?.pop();
+//         }
+//       });
+//     }
+//   }
 
-  @override
-  void didPop(Route route, Route? previousRoute) {
-    super.didPop(route, previousRoute);
-    // Cancel the subscription when the route is popped
-    _adapterStateSubscription?.cancel();
-    _adapterStateSubscription = null;
-  }
-}
+//   @override
+//   void didPop(Route route, Route? previousRoute) {
+//     super.didPop(route, previousRoute);
+//     // Cancel the subscription when the route is popped
+//     _adapterStateSubscription?.cancel();
+//     _adapterStateSubscription = null;
+//   }
+// }
 
 // //import 'dart:convert';
 
