@@ -54,6 +54,8 @@ class _FlutterBlueAppState extends State<MyApp> {
     );
   }
 }
+//wait so would this just be a simple fix of just extracting the scaffold into another class ?
+//Essentially, the context belongs to the Widget class. And when searching for inherited widgets, it can only search up the tree from that Widget
 
 class HomeScreen extends StatelessWidget {
   final Widget screen;

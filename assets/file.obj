@@ -1,3 +1,6 @@
+mtllib cube.mtl
+usemtl TransparentMaterial
+
 # cube.obj
 # Import into Blender with Y-forward, Z-up
 #
