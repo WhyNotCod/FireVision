@@ -70,10 +70,9 @@ class _FlutterBlueAppState extends State<MyApp> {
               ElevatedButton(
                 onPressed: () {
                   //print('Navigating to Render'); // Debugging print statement
-                  Navigator.push(
-                    context,
+                  Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => Render(title: 'FireVision'),
+                      builder: (context) => const Render(title: 'FireVision'),
                     ),
                   );
                 },
