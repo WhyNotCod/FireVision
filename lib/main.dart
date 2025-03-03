@@ -58,29 +58,28 @@ class _FlutterBlueAppState extends State<MyApp> {
         ? const ScanScreen()
         : BluetoothOffScreen(adapterState: _adapterState);
 
-    MaterialApp(
+    return MaterialApp(
       color: const Color.fromARGB(255, 190, 98, 12),
       title: 'FireVisions',
       home: Scaffold(
         body: Center(
-          child: Column(
-            children: <Widget>[
-              Image.asset('assets/images/icons8-fire-100.png',
-                  height: 200, scale: 2),
-              ElevatedButton(
-                onPressed: () {
-                  //print('Navigating to Render'); // Debugging print statement
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const Render(title: 'FireVision'),
-                    ),
-                  );
-                },
-                child: const Text('3D Render'),
-              ),
-              Expanded(child: screen),
-            ],
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Render()),
+              );
+            },
+            child: Text('3D Render'),
           ),
+          //Expanded(child: screen),
+          //Column(
+          // children: <Widget>[
+          //   Image.asset('assets/images/icons8-fire-100.png',
+          //       height: 200, scale: 2),
+
+          //],
+          //),
         ),
       ),
       navigatorObservers: [BluetoothAdapterStateObserver()],
