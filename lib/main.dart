@@ -58,7 +58,7 @@ class _FlutterBlueAppState extends State<MyApp> {
         ? const ScanScreen()
         : BluetoothOffScreen(adapterState: _adapterState);
 
-    return MaterialApp(
+    MaterialApp(
       color: const Color.fromARGB(255, 190, 98, 12),
       title: 'FireVisions',
       home: Scaffold(
