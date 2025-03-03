@@ -3,7 +3,7 @@
 import 'dart:async';
 import 'screens/bluetooth_off_screen.dart';
 import 'screens/scan_screen.dart';
-import 'Render.dart';
+import 'package:fire_vision/Render.dart';
 // import 'package:english_words/english_words.dart';
 // import 'package:provider/provider.dart';
 
@@ -83,7 +83,7 @@ class _FlutterBlueAppState extends State<MyApp> {
                   print('Navigating to Render'); // Debugging print statement
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const Render(title: 'FireVision'),
+                      builder: (context) => const Render(),
                     ),
                   );
                 },

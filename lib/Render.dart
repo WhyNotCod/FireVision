@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cube/flutter_cube.dart';
 
 class Render extends StatefulWidget {
-  const Render({super.key, this.title});
+  const Render({super.key});
 
-  final String? title;
+  //final String? title;
 
   @override
   State<Render> createState() => _RenderState();
@@ -43,7 +43,7 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(widget.title!),
+        title: Text("Fire_3D"),
       ),
       body: Stack(
         children: [
