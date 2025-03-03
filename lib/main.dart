@@ -83,7 +83,7 @@ class _FlutterBlueAppState extends State<MyApp> {
                   print('Navigating to Render'); // Debugging print statement
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const Render(),
+                      builder: (context) => Render(),
                     ),
                   );
                 },
