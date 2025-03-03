@@ -42,70 +42,73 @@ class _FlutterBlueAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // Widget screen = _adapterState == BluetoothAdapterState.on
-    //     ? const ScanScreen()
-    //     : BluetoothOffScreen(adapterState: _adapterState);
+    Widget screen = _adapterState == BluetoothAdapterState.on
+        ? const ScanScreen()
+        : BluetoothOffScreen(adapterState: _adapterState);
 
     return MaterialApp(
       color: const Color.fromARGB(255, 190, 98, 12),
       title: 'FireVisions',
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text("FireVision"),
-        ),
+        // appBar: AppBar(
+        //   title: const Text("FireVision"),
+        // ),
         body: Center(
           child: Column(
             children: <Widget>[
               Image.asset('assets/images/icons8-fire-100.png',
                   height: 200, scale: 2),
-              ElevatedButton(
-                onPressed: () {
-                  print('Navigating to Render'); // Debugging print statement
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Render(),
-                    ),
-                  );
-                },
-                child: const Text('3D Render'),
+              Positioned(
+                bottom: 20,
+                right: 20,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Render(),
+                      ),
+                    );
+                  },
+                  child: const Text('Back'),
+                ),
               ),
-              //Expanded(child: screen),
+              Expanded(child: screen),
             ],
           ),
         ),
       ),
-      //navigatorObservers: [BluetoothAdapterStateObserver()],
+      navigatorObservers: [BluetoothAdapterStateObserver()],
     );
   }
 }
 
-// class BluetoothAdapterStateObserver extends NavigatorObserver {
-//   StreamSubscription<BluetoothAdapterState>? _adapterStateSubscription;
+class BluetoothAdapterStateObserver extends NavigatorObserver {
+  StreamSubscription<BluetoothAdapterState>? _adapterStateSubscription;
 
-//   @override
-//   void didPush(Route route, Route? previousRoute) {
-//     super.didPush(route, previousRoute);
-//     if (route.settings.name == '/DeviceScreen') {
-//       // Start listening to Bluetooth state changes when a new route is pushed
-//       _adapterStateSubscription ??=
-//           FlutterBluePlus.adapterState.listen((state) {
-//         if (state != BluetoothAdapterState.on) {
-//           // Pop the current route if Bluetooth is off
-//           navigator?.pop();
-//         }
-//       });
-//     }
-//   }
+  @override
+  void didPush(Route route, Route? previousRoute) {
+    super.didPush(route, previousRoute);
+    if (route.settings.name == '/DeviceScreen') {
+      // Start listening to Bluetooth state changes when a new route is pushed
+      _adapterStateSubscription ??=
+          FlutterBluePlus.adapterState.listen((state) {
+        if (state != BluetoothAdapterState.on) {
+          // Pop the current route if Bluetooth is off
+          navigator?.pop();
+        }
+      });
+    }
+  }
 
-//   @override
-//   void didPop(Route route, Route? previousRoute) {
-//     super.didPop(route, previousRoute);
-//     // Cancel the subscription when the route is popped
-//     _adapterStateSubscription?.cancel();
-//     _adapterStateSubscription = null;
-//   }
-// }
+  @override
+  void didPop(Route route, Route? previousRoute) {
+    super.didPop(route, previousRoute);
+    // Cancel the subscription when the route is popped
+    _adapterStateSubscription?.cancel();
+    _adapterStateSubscription = null;
+  }
+}
 
 // //import 'dart:convert';
 
