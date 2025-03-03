@@ -22,23 +22,22 @@ void main() {
 // This widget shows BluetoothOffScreen or
 // ScanScreen depending on the adapter state
 //
-class MyApp extends StatelessWidget {
+
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return _FlutterBlueApp();
-  }
+  State<MyApp> createState() => _FlutterBlueAppState();
 }
 
-class _FlutterBlueApp extends StatefulWidget {
-  const _FlutterBlueApp({Key? key}) : super(key: key);
+// class ElevatedButtonExample extends StatefulWidget {
+//   const ElevatedButtonExample({super.key});
 
-  @override
-  _FlutterBlueAppState createState() => _FlutterBlueAppState();
-}
+//   @override
+//   State<ElevatedButtonExample> createState() => _FlutterBlueAppState();
+// }
 
-class _FlutterBlueAppState extends State<_FlutterBlueApp> {
+class _FlutterBlueAppState extends State<MyApp> {
   BluetoothAdapterState _adapterState = BluetoothAdapterState.unknown;
 
   late StreamSubscription<BluetoothAdapterState> _adapterStateStateSubscription;
@@ -71,6 +70,9 @@ class _FlutterBlueAppState extends State<_FlutterBlueApp> {
       color: const Color.fromARGB(255, 190, 98, 12),
       title: 'FireVisions',
       home: Scaffold(
+        appBar: AppBar(
+          title: const Text("FireVision"),
+        ),
         body: Center(
           child: Column(
             children: <Widget>[
@@ -78,7 +80,7 @@ class _FlutterBlueAppState extends State<_FlutterBlueApp> {
                   height: 200, scale: 2),
               ElevatedButton(
                 onPressed: () {
-                  //print('Navigating to Render'); // Debugging print statement
+                  print('Navigating to Render'); // Debugging print statement
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => const Render(title: 'FireVision'),
