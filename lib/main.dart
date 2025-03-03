@@ -22,14 +22,23 @@ void main() {
 // This widget shows BluetoothOffScreen or
 // ScanScreen depending on the adapter state
 //
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _FlutterBlueAppState();
+  Widget build(BuildContext context) {
+    return _FlutterBlueApp();
+  }
 }
 
-class _FlutterBlueAppState extends State<MyApp> {
+class _FlutterBlueApp extends StatefulWidget {
+  const _FlutterBlueApp({Key? key}) : super(key: key);
+
+  @override
+  _FlutterBlueAppState createState() => _FlutterBlueAppState();
+}
+
+class _FlutterBlueAppState extends State<_FlutterBlueApp> {
   BluetoothAdapterState _adapterState = BluetoothAdapterState.unknown;
 
   late StreamSubscription<BluetoothAdapterState> _adapterStateStateSubscription;
@@ -63,23 +72,24 @@ class _FlutterBlueAppState extends State<MyApp> {
       title: 'FireVisions',
       home: Scaffold(
         body: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Render()),
-              );
-            },
-            child: Text('3D Render'),
+          child: Column(
+            children: <Widget>[
+              Image.asset('assets/images/icons8-fire-100.png',
+                  height: 200, scale: 2),
+              ElevatedButton(
+                onPressed: () {
+                  //print('Navigating to Render'); // Debugging print statement
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const Render(title: 'FireVision'),
+                    ),
+                  );
+                },
+                child: const Text('3D Render'),
+              ),
+              Expanded(child: screen),
+            ],
           ),
-          //Expanded(child: screen),
-          //Column(
-          // children: <Widget>[
-          //   Image.asset('assets/images/icons8-fire-100.png',
-          //       height: 200, scale: 2),
-
-          //],
-          //),
         ),
       ),
       navigatorObservers: [BluetoothAdapterStateObserver()],
