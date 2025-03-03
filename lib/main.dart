@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'screens/bluetooth_off_screen.dart';
 import 'screens/scan_screen.dart';
-import 'package:fire_vision/Render.dart';
+import 'render.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
@@ -61,7 +61,8 @@ class _FlutterBlueAppState extends State<MyApp> {
               ElevatedButton(
                 onPressed: () {
                   print('Navigating to Render'); // Debugging print statement
-                  Navigator.of(context).push(
+                  Navigator.push(
+                    context,
                     MaterialPageRoute(
                       builder: (context) => const Render(),
                     ),
