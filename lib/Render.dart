@@ -26,7 +26,7 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
         scale: Vector3(5.0, 5.0, 5.0),
         backfaceCulling: true,
         fileName: 'assets/file.obj');
-    //lighting: false);
+
     _c = Object(
         scale: Vector3(5.0, 5.0, 5.0),
         backfaceCulling: true,
