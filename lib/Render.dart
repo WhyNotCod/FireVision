@@ -1,5 +1,8 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_cube/flutter_cube.dart';
+//import 'package:model_viewer_plus/model_viewer_plus.dart';
 
 class Render extends StatefulWidget {
   const Render({super.key});
@@ -20,9 +23,19 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
     _scene = scene;
     scene.camera.position.z = 50;
     _cube = Object(
-        scale: Vector3(5.0, 5.0, 5.0),
-        backfaceCulling: true,
-        fileName: 'assets/file.obj');
+      scale: Vector3(5.0, 5.0, 5.0),
+      backfaceCulling: true,
+      fileName: 'assets/file.obj',
+      visiable: false,
+      // materials: [
+      //   // Set material to transparent for all faces
+      //   Material(
+      //     color: Colors.blue.withOpacity(0.2), // Semi-transparent
+      //     specularColor: Colors.blue.withOpacity(0.2),
+      //     emissiveColor: Colors.blue.withOpacity(0.1),
+      //   ),
+      // ],
+    );
     _c = Object(
         scale: Vector3(5.0, 5.0, 5.0),
         backfaceCulling: true,
