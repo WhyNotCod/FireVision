@@ -3,7 +3,7 @@ newmtl TransparentMaterial
 Ka 1.000 1.000 1.000  # Ambient color
 Kd 1.000 1.000 1.000  # Diffuse color
 Ks 0.000 0.000 0.000  # Specular color
-d 0.2                 # Transparency (0.0 = fully transparent, 1.0 = fully opaque)
+d 0.0                 # Transparency (0.0 = fully transparent, 1.0 = fully opaque)
 Ns 10.000             # Shininess
 illum 2               # Illumination model
 
