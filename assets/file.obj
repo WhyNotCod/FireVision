@@ -18,6 +18,7 @@ usemtl TransparentMaterial
 
 g cube
 
+usemtl EdgeMaterial
 # Vertices
 v 0.0 0.0 0.0  # 1 a
 v 0.0 1.0 0.0  # 2 b
@@ -28,6 +29,7 @@ v 0.0 1.0 1.0  # 6 f
 v 1.0 1.0 1.0  # 7 g
 v 1.0 0.0 1.0  # 8 h
 
+usemtl TransparentMaterial
 # Normal vectors
 # One for each face. Shared by all vertices in that face.
 vn  1.0  0.0  0.0  # 1 cghd

@@ -22,16 +22,16 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
   void _onSceneCreated(Scene scene) async {
     _scene = scene;
     scene.camera.position.z = 50;
+    // _cube = Object(
+    //     scale: Vector3(5.0, 5.0, 5.0),
+    //     backfaceCulling: true,
+    //     fileName: 'assets/file.obj');
+
     _cube = Object(
         scale: Vector3(5.0, 5.0, 5.0),
         backfaceCulling: true,
         fileName: 'assets/file.obj');
-
-    // _c = Object(
-    //     scale: Vector3(5.0, 5.0, 5.0),
-    //     backfaceCulling: true,
-    //     fileName: 'assets/file.obj');
-    // _cube!.add(_c!);
+    //_cube!.add(_c!);
 
     scene.world.add(_cube!);
   }
