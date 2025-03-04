@@ -23,19 +23,10 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
     _scene = scene;
     scene.camera.position.z = 50;
     _cube = Object(
-      scale: Vector3(5.0, 5.0, 5.0),
-      backfaceCulling: true,
-      fileName: 'assets/file.obj',
-      visiable: false,
-      // materials: [
-      //   // Set material to transparent for all faces
-      //   Material(
-      //     color: Colors.blue.withOpacity(0.2), // Semi-transparent
-      //     specularColor: Colors.blue.withOpacity(0.2),
-      //     emissiveColor: Colors.blue.withOpacity(0.1),
-      //   ),
-      // ],
-    );
+        scale: Vector3(5.0, 5.0, 5.0),
+        backfaceCulling: true,
+        fileName: 'assets/file.obj',
+        lighting: false);
     _c = Object(
         scale: Vector3(5.0, 5.0, 5.0),
         backfaceCulling: true,
