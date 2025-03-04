@@ -18,7 +18,7 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
   Object? _cube;
   late AnimationController _controller;
 
-  Object? _c;
+  //Object? _c;
   void _onSceneCreated(Scene scene) async {
     _scene = scene;
     scene.camera.position.z = 50;
@@ -27,11 +27,11 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
         backfaceCulling: true,
         fileName: 'assets/file.obj');
 
-    _c = Object(
-        scale: Vector3(5.0, 5.0, 5.0),
-        backfaceCulling: true,
-        fileName: 'assets/file.obj');
-    _cube!.add(_c!);
+    // _c = Object(
+    //     scale: Vector3(5.0, 5.0, 5.0),
+    //     backfaceCulling: true,
+    //     fileName: 'assets/file.obj');
+    // _cube!.add(_c!);
 
     scene.world.add(_cube!);
   }
