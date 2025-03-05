@@ -17,14 +17,44 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
   Object? _room;
   Object? _name;
   late AnimationController _controller;
+  late Animation<Vector3> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 5),
+      vsync: this,
+    );
+
+    _animation = Tween<Vector3>(
+      begin: Vector3(0, 0, 0),
+      end: Vector3(10, 0, 0), // Move 10 units in the x direction
+    ).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.linear,
+    ));
+
+    _animation.addListener(() {
+      if (_name != null) {
+        //move name obj around
+        _name!.position.setFrom(_animation.value);
+        _name!.updateTransform();
+        _scene.update();
+      }
+    });
+
+    _controller.repeat(reverse: true); // Repeat the animation back and forth
+  }
 
   void _onSceneCreated(Scene scene) async {
     _scene = scene;
-    scene.camera.position.z = 10; // Adjust camera position
+    scene.camera.position.z =
+        10; // Adjust camera position, smaller is closer to camera
 
     // Create a large cube to represent the room
     _room = Object(
-      scale: Vector3(20.0, 20.0, 20.0), // Room dimensions
+      scale: Vector3(30.0, 30.0, 30.0), // Room dimensions
       position: Vector3(0, 0, 0),
       fileName: 'assets/file.obj', // Use a cube model
       backfaceCulling: true,
@@ -35,7 +65,7 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
 
     // Create smaller rectangular objects (e.g., furniture)
     _name = Object(
-      scale: Vector3(3.0, 1.0, 2.0), // name dimensions
+      scale: Vector3(2.0, 1.0, 2.0), // name dimensions
       position: Vector3(0, 0, 0), // Position inside the room
       fileName: 'assets/name.obj',
     ); // Use a name model
