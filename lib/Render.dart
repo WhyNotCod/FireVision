@@ -14,6 +14,7 @@ class Render extends StatefulWidget {
 class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
   late Scene _scene;
   Object? _room;
+  Object? _name;
   late AnimationController _controller;
 
   void _onSceneCreated(Scene scene) async {
@@ -32,14 +33,15 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
     scene.world.add(_room!);
 
     // Create smaller rectangular objects (e.g., furniture)
-    final name = Object(
+    _name = Object(
       scale: Vector3(3.0, 1.0, 2.0), // name dimensions
       position: Vector3(0, 0, 0), // Position inside the room
       fileName: 'assets/name.obj',
     ); // Use a name model
     //material: Material(color: Colors.blue[300]));
     // Add the smaller objects to the scene
-    scene.world.add(name);
+    scene.world
+        .add(_name!); //! assets var that might be null, is not null at runtime
     //scene.world.add(chair);
   }
 
@@ -69,6 +71,7 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
                 }
               },
               onScaleUpdate: (details) {
+                //remove zoom in and out?
                 // if (_room != null) {
                 //   _room!.scale.x = details.scale;
                 //   _room!.scale.y = details.scale;
