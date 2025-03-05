@@ -34,7 +34,7 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
     final table = Object(
       scale: Vector3(3.0, 1.0, 2.0), // Table dimensions
       position: Vector3(0, -8, 0), // Position inside the room
-      fileName: 'assets/table.obj',
+      fileName: 'assets/name.obj',
     ); // Use a table model
     //material: Material(color: Colors.blue[300]));
 
