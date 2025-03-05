@@ -35,7 +35,7 @@ dependencies:
   english_words: ^4.0.0
   provider: ^6.0.5
   flutter_cube: ^0.1.0
-  #model_viewer_plus: ^1.9.1
+  three_dart: ^0.0.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -62,7 +62,9 @@ flutter:
     #- assets/images/fireicon.jpg
     - assets/images/icons8-fire-100.png
     - assets/file.obj
-    - assets/cube.mtl
+#    - assets/cube.mtl
+    - assets/name.obj
+#    - assets/lightb.mtl
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
