@@ -39,8 +39,8 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
     // Light blue object
     _lightBlueObject = Object(
       scale: Vector3(2.0, 2.0, 2.0), // Adjust the scale as needed
-      position: Vector3(0.0, 0.0,
-          -5.0), // Position it in the middle of the cube, touching the bottom face
+      position: Vector3(0.0, -4.0,
+          0.0), // Position it in the middle of the cube, touching the bottom face
       backfaceCulling: true,
       fileName: 'assets/name.obj',
     );

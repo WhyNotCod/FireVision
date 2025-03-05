@@ -62,9 +62,9 @@ flutter:
     #- assets/images/fireicon.jpg
     - assets/images/icons8-fire-100.png
     - assets/file.obj
-#    - assets/cube.mtl
+    - assets/cube.mtl
     - assets/name.obj
-#    - assets/lightb.mtl
+    - assets/lightb.mtl
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
