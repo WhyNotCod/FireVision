@@ -23,7 +23,7 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
     // Create a large cube to represent the room
     _room = Object(
       scale: Vector3(20.0, 20.0, 20.0), // Room dimensions
-      fileName: 'assets/cube.obj', // Use a cube model
+      fileName: 'assets/file.obj', // Use a cube model
       backfaceCulling: true,
     );
 
