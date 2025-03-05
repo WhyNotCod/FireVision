@@ -23,13 +23,13 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(seconds: 5),
-      vsync: this,
+      duration: const Duration(seconds: 5), //timing
+      vsync: this, //vsync, synchronised
     );
 
     _animation = Tween<Vector3>(
-      begin: Vector3(0, 0, 0),
-      end: Vector3(10, 0, 0), // Move 10 units in the x direction
+      begin: Vector3(0, 0, 0), //x, y, z
+      end: Vector3(1, 1, -1), // Move 10 units in the x direction
     ).animate(CurvedAnimation(
       parent: _controller,
       curve: Curves.linear,
