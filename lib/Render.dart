@@ -18,7 +18,7 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
 
   void _onSceneCreated(Scene scene) async {
     _scene = scene;
-    scene.camera.position.z = 50; // Adjust camera position
+    scene.camera.position.z = 10; // Adjust camera position
 
     // Create a large cube to represent the room
     _room = Object(
@@ -32,21 +32,14 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
     scene.world.add(_room!);
 
     // Create smaller rectangular objects (e.g., furniture)
-    final table = Object(
-      scale: Vector3(3.0, 1.0, 2.0), // Table dimensions
+    final name = Object(
+      scale: Vector3(3.0, 1.0, 2.0), // name dimensions
       position: Vector3(0, 0, 0), // Position inside the room
       fileName: 'assets/name.obj',
-    ); // Use a table model
+    ); // Use a name model
     //material: Material(color: Colors.blue[300]));
-
-    // final chair = Object(
-    //   scale: Vector3(1.0, 1.0, 1.0), // Chair dimensions
-    //   position: Vector3(3, -8, 0), // Position inside the room
-    //   fileName: 'assets/chair.obj', // Use a chair model
-    // );
-
     // Add the smaller objects to the scene
-    scene.world.add(table);
+    scene.world.add(name);
     //scene.world.add(chair);
   }
 
