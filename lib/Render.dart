@@ -23,6 +23,7 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
     // Create a large cube to represent the room
     _room = Object(
       scale: Vector3(20.0, 20.0, 20.0), // Room dimensions
+      position: Vector3(0, 0, 0),
       fileName: 'assets/file.obj', // Use a cube model
       backfaceCulling: true,
     );
@@ -33,7 +34,7 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
     // Create smaller rectangular objects (e.g., furniture)
     final table = Object(
       scale: Vector3(3.0, 1.0, 2.0), // Table dimensions
-      position: Vector3(0, -8, 0), // Position inside the room
+      position: Vector3(0, 0, 0), // Position inside the room
       fileName: 'assets/name.obj',
     ); // Use a table model
     //material: Material(color: Colors.blue[300]));
@@ -73,6 +74,15 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
                   _room!.updateTransform();
                   _scene.update();
                 }
+              },
+              onScaleUpdate: (details) {
+                // if (_room != null) {
+                //   _room!.scale.x = details.scale;
+                //   _room!.scale.y = details.scale;
+                //   _room!.scale.z = details.scale;
+                //   _room!.updateTransform();
+                //   _scene.update();
+                // }
               },
               child: Cube(onSceneCreated: _onSceneCreated),
             ),
