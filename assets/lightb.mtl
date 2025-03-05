@@ -1,7 +1,4 @@
 newmtl LightBlueMaterial
-Ka 0.000 0.000 1.000  # Ambient color (blue)
-Kd 0.000 0.000 1.000  # Diffuse color (blue)
-Ks 0.000 0.000 0.000  # Specular color
-d 1.0                 # Transparency (0.0 = fully transparent, 1.0 = fully opaque)
-Ns 10.000             # Shininess
-illum 2               # Illumination model
+Ka 1.000 1.000 1.000  # Ambient color (optional)
+Kd 0.000 0.000 1.000  # Diffuse color (RGB for blue)
+Ks 0.000 0.000 0.000  # Specular color (optional, for shiny materials)
