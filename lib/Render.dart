@@ -25,7 +25,7 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
   //Object? _c;
   void _onSceneCreated(Scene scene) async {
     _scene = scene;
-    scene.camera.position.z = 20; //decr # moves camera closer
+    scene.camera.position.z = 5; //decr # moves camera closer
     // _cube = Object(
     //     scale: Vector3(5.0, 5.0, 5.0),
     //     backfaceCulling: true,
@@ -42,7 +42,7 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
       position: Vector3(0.0, 0.0,
           -5.0), // Position it in the middle of the cube, touching the bottom face
       backfaceCulling: true,
-      fileName: 'assets/light_blue_object.obj',
+      fileName: 'assets/name.obj',
     );
     _cube!.add(_lightBlueObject!);
 
