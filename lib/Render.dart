@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cube/flutter_cube.dart';
 //import 'package:three_dart/three_dart.dart' as three;
+import 'package:vector_math/vector_math_64.dart';
 
 class Render extends StatefulWidget {
   const Render({super.key});
@@ -67,18 +68,8 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
                   _room!.rotation.x += details.delta.dy / 100;
                   _room!.rotation.y += details.delta.dx / 100;
                   _room!.updateTransform();
-                  _scene.update();
                 }
-              },
-              onScaleUpdate: (details) {
-                //remove zoom in and out?
-                // if (_room != null) {
-                //   _room!.scale.x = details.scale;
-                //   _room!.scale.y = details.scale;
-                //   _room!.scale.z = details.scale;
-                //   _room!.updateTransform();
-                //   _scene.update();
-                // }
+                _scene.update();
               },
               child: Cube(onSceneCreated: _onSceneCreated),
             ),
