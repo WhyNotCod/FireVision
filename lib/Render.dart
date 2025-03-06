@@ -50,11 +50,11 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
   void _onSceneCreated(Scene scene) async {
     _scene = scene;
     scene.camera.position.z =
-        10; // Adjust camera position, smaller is closer to camera
+        20; // Adjust camera position, smaller is closer to camera
 
     // Create a large cube to represent the room
     _room = Object(
-      scale: Vector3(30.0, 30.0, 30.0), // Room dimensions
+      scale: Vector3(60.0, 60.0, 60.0), // Room dimensions
       position: Vector3(0, 0, 0),
       fileName: 'assets/file.obj', // Use a cube model
       backfaceCulling: true,
