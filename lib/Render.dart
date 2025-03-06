@@ -35,14 +35,14 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
       curve: Curves.linear,
     ));
 
-    _animation.addListener(() {
-      if (_obj1 != null) {
-        //move name obj around
-        _obj1!.position.setFrom(_animation.value);
-        _obj1!.updateTransform();
-        _scene.update();
-      }
-    });
+    // _animation.addListener(() {
+    //   if (_obj1 != null) {
+    //     //move name obj around
+    //     _obj1!.position.setFrom(_animation.value);
+    //     _obj1!.updateTransform();
+    //     _scene.update();
+    //   }
+    // });
 
     _controller.repeat(reverse: true); // Repeat the animation back and forth
   }
