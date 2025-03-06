@@ -28,7 +28,7 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
     );
 
     _animation = Tween<Vector3>(
-      begin: Vector3(0, 0, 0), //x, y, z
+      begin: Vector3(30, 0, 30), //x, y, z
       end: Vector3(1, 0, 1), // Move 10 units in the x direction, x, z, y
     ).animate(CurvedAnimation(
       parent: _controller,
@@ -55,7 +55,7 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
     // Create a large cube to represent the room
     _room = Object(
       scale: Vector3(60.0, 60.0, 60.0), // Room dimensions
-      position: Vector3(-30, 0, -30),
+      position: Vector3(0, 0, 0),
       fileName: 'assets/file.obj', // Use a cube model
       backfaceCulling: true,
     );
@@ -97,6 +97,7 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
                 if (_room != null) {
                   _room!.rotation.x += details.localPosition.dy / 100;
                   _room!.rotation.y += details.localPosition.dx / 100;
+                  //_room!.rotation.z += details.localPosition.dx / 100;
                   _room!.updateTransform();
                 }
                 _scene.update();
