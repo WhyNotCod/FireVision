@@ -29,7 +29,7 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
 
     _animation = Tween<Vector3>(
       begin: Vector3(0, 0, 0), //x, y, z
-      end: Vector3(1, 0, -1), // Move 10 units in the x direction
+      end: Vector3(1, 1, 0), // Move 10 units in the x direction, x, z, y
     ).animate(CurvedAnimation(
       parent: _controller,
       curve: Curves.linear,

@@ -65,6 +65,7 @@ flutter:
     - assets/cube.mtl
     - assets/name.obj
     - assets/lightb.mtl
+    - assets/json/replay_1.json
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
