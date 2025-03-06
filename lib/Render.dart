@@ -15,7 +15,7 @@ class Render extends StatefulWidget {
 class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
   late Scene _scene;
   Object? _room;
-  Object? _name;
+  Object? _obj1;
   late AnimationController _controller;
   late Animation<Vector3> _animation;
 
@@ -28,7 +28,7 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
     );
 
     _animation = Tween<Vector3>(
-      begin: Vector3(-30, 0, -30), //x, y, z
+      begin: Vector3(0, 0, 0), //x, y, z
       end: Vector3(1, 0, 1), // Move 10 units in the x direction, x, z, y
     ).animate(CurvedAnimation(
       parent: _controller,
@@ -36,10 +36,10 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
     ));
 
     _animation.addListener(() {
-      if (_name != null) {
+      if (_obj1 != null) {
         //move name obj around
-        _name!.position.setFrom(_animation.value);
-        _name!.updateTransform();
+        _obj1!.position.setFrom(_animation.value);
+        _obj1!.updateTransform();
         _scene.update();
       }
     });
@@ -64,7 +64,7 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
     scene.world.add(_room!);
 
     // Create smaller rectangular objects (e.g., furniture)
-    _name = Object(
+    _obj1 = Object(
       scale: Vector3(2.0, 1.0, 2.0), // name dimensions
       position: Vector3(0, 0, 0), // Position inside the room
       fileName: 'assets/name.obj',
@@ -72,7 +72,7 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
     //material: Material(color: Colors.blue[300]));
     // Add the smaller objects to the scene
     scene.world
-        .add(_name!); //! assets var that might be null, is not null at runtime
+        .add(_obj1!); //! assets var that might be null, is not null at runtime
     //scene.world.add(chair);
   }
 
@@ -95,7 +95,6 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
             child: GestureDetector(
               onPanUpdate: (details) {
                 if (_room != null) {
-                  
                   _room!.rotation.x += details.localPosition.dy / 100;
                   _room!.rotation.y += details.localPosition.dx / 100;
                   //_room!.rotation.z += details.localPosition.dx / 100;
