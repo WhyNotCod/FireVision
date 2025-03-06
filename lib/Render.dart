@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cube/flutter_cube.dart';
 //import 'package:three_dart/three_dart.dart' as three;
-import 'package:vector_math/vector_math_64.dart';
+//import 'package:vector_math/vector_math_64.dart';
 
 class Render extends StatefulWidget {
   const Render({super.key});
@@ -84,6 +84,10 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    // Calculate the dimensions of the room in meters
+    final roomDimensions = _room != null
+        ? 'Room Dimensions: ${_room!.scale.x}m x ${_room!.scale.y}m x ${_room!.scale.z}m'
+        : 'Room Dimensions: N/A';
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -113,6 +117,18 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
                 Navigator.pop(context);
               },
               child: const Text('Back'),
+            ),
+          ),
+          Positioned(
+            top: 20,
+            left: 20,
+            child: Text(
+              roomDimensions,
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.black,
+                backgroundColor: Colors.white,
+              ),
             ),
           ),
         ],
