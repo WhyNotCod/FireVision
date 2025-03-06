@@ -65,8 +65,8 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
 
     // Create smaller rectangular objects (e.g., furniture)
     _obj1 = Object(
-      scale: Vector3(2.0, 1.0, 2.0), // name dimensions
-      position: Vector3(0, 0, 0), // Position inside the room
+      scale: Vector3(6.0, 7.0, 3.0), // name dimensions
+      position: Vector3(-3, 0.5, 0), // Position inside the room
       fileName: 'assets/name.obj',
     ); // Use a name model
     //material: Material(color: Colors.blue[300]));
