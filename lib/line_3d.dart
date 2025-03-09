@@ -17,7 +17,6 @@ import 'dart:convert';
 
 //   // Assuming the JSON structure is a list of lists with x, y, z coordinates
 //   data = jsonData.map((item) => [item[0] as double, item[1] as double, item[2] as double]).toList();
-
 //   setState(() {
 //     isLoading = false;
 //   });
