@@ -137,6 +137,98 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
 }
 
 
+//------------------Box with data points
+// '''
+
+// var x = 0;
+// var y = 2;
+// var z = 2;  // Example value for z
+
+
+// var data = [
+//     [0, 0, 0], [1, 0, 0],   // Line A-B
+//     [1, 0, 2], [0, 0, 2], [0, 0, 0],
+//     [0, 1, 0], [1, 1, 0], [1, 0, 0], [1, 0, 2],
+//     [1, 1, 2], [1, 1, 0], [0, 1, 0], [0, 1, 2],
+//     [0, 0, 2], [1, 0, 2], [1, 1, 2], [0, 1, 2]
+// ];
+
+
+// // Replace 2 with z
+// for (var i = 0; i < data.length; i++) {
+//     for (var j = 0; j < data[i].length; j++) {
+//         if (data[i][j] === 2) {
+//             data[i][j] = z;
+//         }
+//         if (j == 0) {
+//           data[i][j] += x;
+//         }
+//         if (j == 1) {
+//           data[i][j] += y;
+//         }
+//     }
+// }
+
+// var option = {
+//   tooltip: {},
+//   backgroundColor: '#fff',
+//   visualMap: {
+//     show: false,
+//     dimension: 2,
+//     min: 0,
+//     max: 30,
+//     inRange: {
+//       color: [
+//         '#313695',
+//         '#4575b4',
+//         '#74add1',
+//         '#abd9e9',
+//         '#e0f3f8',
+//         '#ffffbf',
+//         '#fee090',
+//         '#fdae61',
+//         '#f46d43',
+//         '#d73027',
+//         '#a50026'
+//       ]
+//     }
+//   },
+//   //dimentions of static boundary box`
+//   xAxis3D: {
+//     type: 'value',
+//     min: -1.80,  // x-min
+//     max: 1.8    // x-max
+//   },
+//   yAxis3D: {
+//     type: 'value',
+//     min: 0,   // y-min
+//     max: 5.5    // y-max
+//   },
+//   zAxis3D: {
+//     type: 'value',
+//     min: 0,     // z-min
+//     max: 2.0    // z-max
+//   },
+//   grid3D: {
+//     // boxWidth: 3.6,  // Difference between x-max and x-min (1.8 - (-1.8))
+//     // boxHeight: 5.3, // Difference between y-max and y-min (5.5 - 0.2)
+//     // boxDepth: 2.0,  // Difference between z-max and z-min (2.0 - 0)
+//     viewControl: {
+//       projection: 'orthographic'
+//     }
+//   },
+//   series: [{
+//           'type': 'line3D',
+//           'data': data,
+//           'lineStyle': {
+//             'width': 4
+//           }
+//         }]
+// };
+
+// '''
+
+
 //---------------- Got box
 //  corect order of lines to make rectangle
 // var data = [ 
