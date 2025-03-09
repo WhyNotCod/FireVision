@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'screens/bluetooth_off_screen.dart';
 import 'screens/scan_screen.dart';
-import 'package:fire_vision/render.dart';
+import 'line_3d.dart';
+//import 'package:fire_vision/render.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
@@ -78,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                 print('Navigating to Render'); // Debugging print statement
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const Render(),
+                    builder: (context) => Graph(),
                   ),
                 );
               },

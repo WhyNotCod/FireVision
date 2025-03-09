@@ -2,8 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_cube/flutter_cube.dart';
-//import 'package:three_dart/three_dart.dart' as three;
-//import 'package:vector_math/vector_math_64.dart';
 
 class Render extends StatefulWidget {
   const Render({super.key});
@@ -23,26 +21,26 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(seconds: 5), //timing
-      vsync: this, //vsync, synchronised
+      duration: const Duration(seconds: 5), // timing
+      vsync: this, // vsync, synchronized
     );
 
     _animation = Tween<Vector3>(
-      begin: Vector3(0, 0, 0), //x, y, z
-      end: Vector3(1, 0, 1), // Move 10 units in the x direction, x, z, y
+      begin: Vector3(0, 0, 0), // x, y, z
+      end: Vector3(1, 0, 1), // Move 1 unit in the x and z directions
     ).animate(CurvedAnimation(
       parent: _controller,
       curve: Curves.linear,
     ));
 
-    // _animation.addListener(() {
-    //   if (_obj1 != null) {
-    //     //move name obj around
-    //     _obj1!.position.setFrom(_animation.value);
-    //     _obj1!.updateTransform();
-    //     _scene.update();
-    //   }
-    // });
+    _animation.addListener(() {
+      if (_obj1 != null) {
+        // Move obj1 around
+        _obj1!.position.setFrom(_animation.value);
+        _obj1!.updateTransform();
+        _scene.update();
+      }
+    });
 
     _controller.repeat(reverse: true); // Repeat the animation back and forth
   }
@@ -65,15 +63,16 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
 
     // Create smaller rectangular objects (e.g., furniture)
     _obj1 = Object(
-      scale: Vector3(6.0, 7.0, 3.0), // name dimensions
+      scale: Vector3(6, 7, 3), // obj1 dimensions
       position: Vector3(-3, 0.5, 0), // Position inside the room
       fileName: 'assets/name.obj',
     ); // Use a name model
-    //material: Material(color: Colors.blue[300]));
     // Add the smaller objects to the scene
     scene.world
         .add(_obj1!); //! assets var that might be null, is not null at runtime
-    //scene.world.add(chair);
+
+    // Update the state to ensure the dimensions are displayed correctly
+    setState(() {});
   }
 
   @override
@@ -88,6 +87,7 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
     final roomDimensions = _room != null
         ? 'Room Dimensions: ${_room!.scale.x}m x ${_room!.scale.y}m x ${_room!.scale.z}m'
         : 'Room Dimensions: N/A';
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -101,7 +101,6 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
                 if (_room != null) {
                   _room!.rotation.x += details.localPosition.dy / 100;
                   _room!.rotation.y += details.localPosition.dx / 100;
-                  //_room!.rotation.z += details.localPosition.dx / 100;
                   _room!.updateTransform();
                 }
                 _scene.update();
@@ -136,96 +135,78 @@ class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
     );
   }
 }
-//------------------------------------------------
 
-// // ignore_for_file: file_names
 
-// import 'package:flutter/material.dart';
-// import 'package:flutter_cube/flutter_cube.dart';
+//---------------- Got box
+//  corect order of lines to make rectangle
+// var data = [ 
+//         [0, 0, 0], [1, 0, 0],   // Line A-B
+//         [1, 0, 1],   [1, 1, 0]
+//         [1, 1,1], [1,1,0]
+//         [0,0,1], [1,1,1]
+        
+//           [1, 1, 0], [1, 1, 0],   // Line C-D
+//           [0, 1, 0], [0, 0, 0],   // Line D-A
+//           [0, 0, 1], [1, 0, 1],   // Line B-C
+         
+//           [1,1,1], [0,1,1],
+//           [0,0,1], [0,1,1],
+//           [0,1,0], [1,1,0], [1,0,0] //cube
+//           ];
 
-// class Render extends StatefulWidget {
-//   const Render({super.key});
-
-//   //final String? title;
-
-//   @override
-//   State<Render> createState() => _RenderState();
-// }
-
-// class _RenderState extends State<Render> with SingleTickerProviderStateMixin {
-//   late Scene _scene;
-//   Object? _cube;
-//   Object? _lightBlueObject;
-//   late AnimationController _controller;
-
-//   //Object? _c;
-//   void _onSceneCreated(Scene scene) async {
-//     _scene = scene;
-//     scene.camera.position.z = 5; //decr # moves camera closer
-//     // _cube = Object(
-//     //     scale: Vector3(5.0, 5.0, 5.0),
-//     //     backfaceCulling: true,
-//     //     fileName: 'assets/file.obj');
-
-//     _cube = Object(
-//         scale: Vector3(10.0, 10.0, 10.0),
-//         backfaceCulling: true,
-//         fileName: 'assets/file.obj');
-
-//     // Light blue object
-//     _lightBlueObject = Object(
-//       scale: Vector3(2.0, 2.0, 2.0), // Adjust the scale as needed
-//       position: Vector3(0.0, -4.0,
-//           0.0), // Position it in the middle of the cube, touching the bottom face
-//       backfaceCulling: true,
-//       fileName: 'assets/name.obj',
-//     );
-//     _cube!.add(_lightBlueObject!);
-
-//     scene.world.add(_cube!);
-//   }
-
-//   @override
-//   void dispose() {
-//     _controller.dispose();
-//     super.dispose();
-//   }
-
-// //work
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         centerTitle: true,
-//         title: Text("Fire_3D"),
-//       ),
-//       body: Stack(
-//         children: [
-//           Center(
-//             child: GestureDetector(
-//               onPanUpdate: (details) {
-//                 if (_cube != null) {
-//                   _cube!.rotation.x += details.delta.dy / 100;
-//                   _cube!.rotation.y += details.delta.dx / 100;
-//                   _cube!.updateTransform();
-//                   _scene.update();
-//                 }
-//               },
-//               child: Cube(onSceneCreated: _onSceneCreated),
-//             ),
-//           ),
-//           Positioned(
-//             bottom: 20,
-//             right: 20,
-//             child: ElevatedButton(
-//               onPressed: () {
-//                 Navigator.pop(context);
-//               },
-//               child: const Text('Back'),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
+// var option = {
+//   tooltip: {},
+//   backgroundColor: '#fff',
+//   visualMap: {
+//     show: false,
+//     dimension: 2,
+//     min: 0,
+//     max: 30,
+//     inRange: {
+//       color: [
+//         '#313695',
+//         '#4575b4',
+//         '#74add1',
+//         '#abd9e9',
+//         '#e0f3f8',
+//         '#ffffbf',
+//         '#fee090',
+//         '#fdae61',
+//         '#f46d43',
+//         '#d73027',
+//         '#a50026'
+//       ]
+//     }
+//   },
+//   //dimentions of static boundary box`
+//   xAxis3D: {
+//     type: 'value',
+//     min: -1.80,  // x-min
+//     max: 1.8    // x-max
+//   },
+//   yAxis3D: {
+//     type: 'value',
+//     min: 0,   // y-min
+//     max: 5.5    // y-max
+//   },
+//   zAxis3D: {
+//     type: 'value',
+//     min: 0,     // z-min
+//     max: 2.0    // z-max
+//   },
+//   grid3D: {
+//     // boxWidth: 3.6,  // Difference between x-max and x-min (1.8 - (-1.8))
+//     // boxHeight: 5.3, // Difference between y-max and y-min (5.5 - 0.2)
+//     // boxDepth: 2.0,  // Difference between z-max and z-min (2.0 - 0)
+//     viewControl: {
+//       projection: 'orthographic'
+//     }
+//   },
+//   series: [{
+//           'type': 'line3D',
+//           'data': data,
+//           'lineStyle': {
+//             'width': 4
+//           }
+//         }]
+// };
