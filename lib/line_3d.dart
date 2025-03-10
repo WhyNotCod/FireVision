@@ -25,9 +25,12 @@ import 'dart:convert';
 //void main() => runApp(MyApp());
 import 'package:flutter/material.dart';
 import 'package:flutter_echarts/flutter_echarts.dart'
+    // ignore: library_prefixes
     as ECharts; // For chart display
 
 class Graph extends StatelessWidget {
+  const Graph({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
