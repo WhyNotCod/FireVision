@@ -1,7 +1,7 @@
 //import 'package:flutter/material.dart';
 //import 'package:flutter_echarts/flutter_echarts.dart';
 //import 'package:flutter/services.dart' show rootBundle;
-import 'dart:convert';
+//import 'dart:convert';
 
 //void main() => runApp(MyApp());
 import 'package:flutter/material.dart';
@@ -66,7 +66,7 @@ class Line3DChart extends StatelessWidget {
     //var dataString = data.toString().replaceAll('[', '').replaceAll(']', '');
 
     // Step 5: Define the ECharts option with the modified data
-    var option = {
+    return Container(child: Echarts(option: ''' {
       "tooltip": {},
       "backgroundColor": "#fff",
       "visualMap": {
@@ -103,7 +103,7 @@ class Line3DChart extends StatelessWidget {
           "lineStyle": {"width": 4}
         }
       ]
-    };
+    }'''));
 
     // Step 6: Return ECharts widget
     // return (
