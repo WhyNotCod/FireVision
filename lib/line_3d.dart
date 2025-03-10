@@ -29,35 +29,35 @@ class Line3DChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Step 1: Define variables
-    var x = 0;
-    var y = 2;
-    var z = 2; // Example value for z
+    // var x = 0;
+    // var y = 2;
+    // var z = 2; // Example value for z
 
     // Step 2: Define the data
-    var data = [
-      [0, 0, 0], [1, 0, 0], // Line A-B
-      [1, 0, 2], [0, 0, 2], [0, 0, 0],
-      [0, 1, 0], [1, 1, 0], [1, 0, 0], [1, 0, 2],
-      [1, 1, 2], [1, 1, 0], [0, 1, 0], [0, 1, 2],
-      [0, 0, 2], [1, 0, 2], [1, 1, 2], [0, 1, 2]
-    ];
+    // var data = [
+    //   [0, 0, 0], [1, 0, 0], // Line A-B
+    //   [1, 0, 2], [0, 0, 2], [0, 0, 0],
+    //   [0, 1, 0], [1, 1, 0], [1, 0, 0], [1, 0, 2],
+    //   [1, 1, 2], [1, 1, 0], [0, 1, 0], [0, 1, 2],
+    //   [0, 0, 2], [1, 0, 2], [1, 1, 2], [0, 1, 2]
+    // ];
 
-    // Step 3: Modify the data list
-    for (var i = 0; i < data.length; i++) {
-      for (var j = 0; j < data[i].length; j++) {
-        if (data[i][j] == 2) {
-          data[i][j] = z; // Replace 2 with z
-        }
-        if (j == 0) {
-          // Update x-coordinate
-          data[i][j] += x; // Add x to the x-coordinate
-        }
-        if (j == 1) {
-          // Update y-coordinate
-          data[i][j] += y; // Add y to the y-coordinate
-        }
-      }
-    }
+    // // Step 3: Modify the data list
+    // for (var i = 0; i < data.length; i++) {
+    //   for (var j = 0; j < data[i].length; j++) {
+    //     if (data[i][j] == 2) {
+    //       data[i][j] = z; // Replace 2 with z
+    //     }
+    //     if (j == 0) {
+    //       // Update x-coordinate
+    //       data[i][j] += x; // Add x to the x-coordinate
+    //     }
+    //     if (j == 1) {
+    //       // Update y-coordinate
+    //       data[i][j] += y; // Add y to the y-coordinate
+    //     }
+    //   }
+    // }
 
     // Step 4: Convert data to a string to use in ECharts configuration
     //var dataString = data.toString().replaceAll('[', '').replaceAll(']', '');
@@ -96,7 +96,13 @@ class Line3DChart extends StatelessWidget {
       "series": [
         {
           "type": "line3D",
-          "data": data,
+          "data": [
+      [0, 0, 0], [1, 0, 0],
+      [1, 0, 2], [0, 0, 2], [0, 0, 0],
+      [0, 1, 0], [1, 1, 0], [1, 0, 0], [1, 0, 2],
+      [1, 1, 2], [1, 1, 0], [0, 1, 0], [0, 1, 2],
+      [0, 0, 2], [1, 0, 2], [1, 1, 2], [0, 1, 2]
+    ],
           "lineStyle": {"width": 4}
         }
       ]
