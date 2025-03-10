@@ -5,6 +5,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_echarts/flutter_echarts.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_echarts/flutter_echarts.dart';
 
 class Graph extends StatelessWidget {
   @override
@@ -13,19 +15,18 @@ class Graph extends StatelessWidget {
       appBar: AppBar(title: Text('3D Chart')),
       body: Echarts(
         extraScript: '''
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts-gl/2.0.8/echarts-gl.min.js"></script>
+          <script src="assets/echarts.min.js"></script>
+          <script src="assets/echarts-gl.min.js"></script>
         ''',
         option: '''
           {
-            "tooltip": {},
-            "xAxis3D": {"type": "value"},
-            "yAxis3D": {"type": "value"},
-            "zAxis3D": {"type": "value"},
-            "grid3D": {"viewControl": {}},
+            "xAxis3D": {},
+            "yAxis3D": {},
+            "zAxis3D": {},
+            "grid3D": {},
             "series": [{
               "type": "line3D",
-              "data": [[0,0,0], [1,0,0], [1,0,2], [0,0,2]],
-              "lineStyle": {"width": 4}
+              "data": [[0,0,0], [1,0,0]]
             }]
           }
         ''',
@@ -33,7 +34,6 @@ class Graph extends StatelessWidget {
     );
   }
 }
-
 // class Graph extends StatelessWidget {
 //   const Graph({super.key});
 
