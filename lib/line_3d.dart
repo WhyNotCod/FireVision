@@ -14,10 +14,10 @@ class Graph extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('3D Chart')),
       body: Echarts(
-        extraScript: '''
-          <script src="assets/echarts.min.js"></script>
-          <script src="assets/echarts-gl.min.js"></script>
-        ''',
+        // extraScript: '''
+        //   <script src="assets/echarts.min.js"></script>
+        //   <script src="assets/echarts-gl.min.js"></script>
+        // ''',
         option: '''
           {
             "xAxis3D": {},
