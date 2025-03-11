@@ -36,7 +36,7 @@ dependencies:
   provider: ^6.0.5
   flutter_cube: ^0.1.0
   flutter_echarts: ^2.5.0
-  webview_flutter: ^4.4.2
+  webview_flutter: ^4.10.0
   
 
   # The following adds the Cupertino Icons font to your application.
@@ -68,6 +68,9 @@ flutter:
     - assets/name.obj
     - assets/lightb.mtl
     - assets/json/replay_1.json
+    - assets/echarts.html
+    - assets/echarts.min.js
+    - assets/echarts-gl.min.js
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

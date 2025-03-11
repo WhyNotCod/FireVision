@@ -1,12 +1,9 @@
 //import 'package:flutter/material.dart';
-//import 'package:flutter_echarts/flutter_echarts.dart';
+import 'package:flutter_echarts/flutter_echarts.dart';
 // import 'package:flutter/services.dart' show rootBundle;
 // import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_echarts/flutter_echarts.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_echarts/flutter_echarts.dart';
+//import 'package:webview_flutter/webview_flutter.dart';
 
 class Graph extends StatelessWidget {
   @override
@@ -14,15 +11,27 @@ class Graph extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('3D Chart')),
       body: Echarts(
-        // extraScript: '''
-        //   <script src="assets/echarts.min.js"></script>
-        //   <script src="assets/echarts-gl.min.js"></script>
-        // ''',
+        extraScript: '''
+          <script src="assets/echarts.min.js"></script>
+          <script src="assets/echarts-gl.min.js"></script>
+        ''',
         option: '''
           {
-            "xAxis3D": {},
-            "yAxis3D": {},
-            "zAxis3D": {},
+            "xAxis3D": {
+              "type": "value",
+              "min": -1.80,  // x-min
+              "max": 1.8    // x-max
+            },
+            "yAxis3D": {
+              "type": "value",
+              "min": 0,   // y-min
+              "max": 5.5    // y-max
+            },
+            "zAxis3D": {
+              "type": "value",
+              "min": 0,     // z-min
+              "max": 2.0    // z-max
+            },
             "grid3D": {},
             "series": [{
               "type": "line3D",
@@ -34,6 +43,7 @@ class Graph extends StatelessWidget {
     );
   }
 }
+//------------------------------------
 // class Graph extends StatelessWidget {
 //   const Graph({super.key});
 
