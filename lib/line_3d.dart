@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_echarts/flutter_echarts.dart';
+import 'gl_script.dart' show glScript;
 import 'dart:math';
 
 class Graph extends StatefulWidget {
@@ -74,11 +75,13 @@ class _GraphState extends State<Graph> {
     }
     ''';
 
-    return Scaffold(
-      appBar: AppBar(title: Text('3D Chart')),
-      body: Echarts(
+    return Container(
+      child: Echarts(
+        extensions: [glScript],
         option: option,
       ),
+      width: 300,
+      height: 250,
     );
   }
 }
