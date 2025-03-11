@@ -1,48 +1,132 @@
-//import 'package:flutter/material.dart';
-import 'package:flutter_echarts/flutter_echarts.dart';
-// import 'package:flutter/services.dart' show rootBundle;
-// import 'dart:convert';
 import 'package:flutter/material.dart';
-//import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_echarts/flutter_echarts.dart';
+import 'dart:math';
 
-class Graph extends StatelessWidget {
+class Graph extends StatefulWidget {
+  @override
+  _GraphState createState() => _GraphState();
+}
+
+class _GraphState extends State<Graph> {
+  List<List<double>> generateData() {
+    List<List<double>> data = [];
+    for (double t = 0; t < 25; t += 0.001) {
+      double x = (1 + 0.25 * cos(75 * t)) * cos(t);
+      double y = (1 + 0.25 * cos(75 * t)) * sin(t);
+      double z = t + 2.0 * sin(75 * t);
+      data.add([x, y, z]);
+    }
+    print(data.length);
+    return data;
+  }
+
   @override
   Widget build(BuildContext context) {
+    List<List<double>> data = generateData();
+    String option = '''
+    {
+      "tooltip": {},
+      "backgroundColor": "#fff",
+      "visualMap": {
+        "show": false,
+        "dimension": 2,
+        "min": 0,
+        "max": 30,
+        "inRange": {
+          "color": [
+            "#313695",
+            "#4575b4",
+            "#74add1",
+            "#abd9e9",
+            "#e0f3f8",
+            "#ffffbf",
+            "#fee090",
+            "#fdae61",
+            "#f46d43",
+            "#d73027",
+            "#a50026"
+          ]
+        }
+      },
+      "xAxis3D": {
+        "type": "value"
+      },
+      "yAxis3D": {
+        "type": "value"
+      },
+      "zAxis3D": {
+        "type": "value"
+      },
+      "grid3D": {
+        "viewControl": {
+          "projection": "orthographic"
+        }
+      },
+      "series": [
+        {
+          "type": "line3D",
+          "data": $data,
+          "lineStyle": {
+            "width": 4
+          }
+        }
+      ]
+    }
+    ''';
+
     return Scaffold(
       appBar: AppBar(title: Text('3D Chart')),
       body: Echarts(
-        extraScript: '''
-          <script src="assets/echarts.min.js"></script>
-          <script src="assets/echarts-gl.min.js"></script>
-        ''',
-        option: '''
-          {
-            "xAxis3D": {
-              "type": "value",
-              "min": -1.80,  // x-min
-              "max": 1.8    // x-max
-            },
-            "yAxis3D": {
-              "type": "value",
-              "min": 0,   // y-min
-              "max": 5.5    // y-max
-            },
-            "zAxis3D": {
-              "type": "value",
-              "min": 0,     // z-min
-              "max": 2.0    // z-max
-            },
-            "grid3D": {},
-            "series": [{
-              "type": "line3D",
-              "data": [[0,0,0], [1,0,0]]
-            }]
-          }
-        ''',
+        option: option,
       ),
     );
   }
 }
+
+
+//-------------
+// import 'package:flutter_echarts/flutter_echarts.dart';
+// import 'package:flutter/material.dart';
+
+
+// class Graph extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: Text('3D Chart')),
+//       body: Echarts(
+//         extraScript: '''
+//           <script src="assets/echarts.min.js"></script>
+//           <script src="assets/echarts-gl.min.js"></script>
+//         ''',
+//         option: '''
+//           {
+//             "xAxis3D": {
+//               "type": "value",
+//               "min": -1.80,  // x-min
+//               "max": 1.8    // x-max
+//             },
+//             "yAxis3D": {
+//               "type": "value",
+//               "min": 0,   // y-min
+//               "max": 5.5    // y-max
+//             },
+//             "zAxis3D": {
+//               "type": "value",
+//               "min": 0,     // z-min
+//               "max": 2.0    // z-max
+//             },
+//             "grid3D": {},
+//             "series": [{
+//               "type": "line3D",
+//               "data": [[0,0,0], [1,0,0]]
+//             }]
+//           }
+//         ''',
+//       ),
+//     );
+//   }
+// }
 //------------------------------------
 // class Graph extends StatelessWidget {
 //   const Graph({super.key});
