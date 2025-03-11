@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_echarts/flutter_echarts.dart';
 import 'gl_script.dart' show glScript;
-import 'dart:math';
+//import 'dart:math';
 
 class Graph extends StatefulWidget {
   @override
@@ -9,21 +9,71 @@ class Graph extends StatefulWidget {
 }
 
 class _GraphState extends State<Graph> {
-  List<List<double>> generateData() {
-    List<List<double>> data = [];
-    for (double t = 0; t < 25; t += 0.001) {
-      double x = (1 + 0.25 * cos(75 * t)) * cos(t);
-      double y = (1 + 0.25 * cos(75 * t)) * sin(t);
-      double z = t + 2.0 * sin(75 * t);
-      data.add([x, y, z]);
+  List<List<double>> data = [
+    [0, 0, 0],
+    [1, 0, 0],
+    [1, 0, 2],
+    [0, 0, 2],
+    [0, 0, 0],
+    [0, 1, 0],
+    [1, 1, 0],
+    [1, 0, 0],
+    [1, 0, 2],
+    [1, 1, 2],
+    [1, 1, 0],
+    [0, 1, 0],
+    [0, 1, 2],
+    [0, 0, 2],
+    [1, 0, 2],
+    [1, 1, 2],
+    [0, 1, 2]
+  ];
+
+  List<List<double>> data2 = [
+    [0, 0, 0],
+    [1, 0, 0],
+    [1, 0, 2],
+    [0, 0, 2],
+    [0, 0, 0],
+    [0, 1, 0],
+    [1, 1, 0],
+    [1, 0, 0],
+    [1, 0, 2],
+    [1, 1, 2],
+    [1, 1, 0],
+    [0, 1, 0],
+    [0, 1, 2],
+    [0, 0, 2],
+    [1, 0, 2],
+    [1, 1, 2],
+    [0, 1, 2]
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    updateData(data, 0, 3, 2);
+    updateData(data2, -1, 0, 1);
+  }
+
+  void updateData(List<List<double>> data, double x, double y, double z) {
+    for (var i = 0; i < data.length; i++) {
+      for (var j = 0; j < data[i].length; j++) {
+        if (data[i][j] == 2) {
+          data[i][j] = z;
+        }
+        if (j == 0) {
+          data[i][j] += x;
+        }
+        if (j == 1) {
+          data[i][j] += y;
+        }
+      }
     }
-    print(data.length);
-    return data;
   }
 
   @override
   Widget build(BuildContext context) {
-    List<List<double>> data = generateData();
     String option = '''
     {
       "tooltip": {},
@@ -50,13 +100,19 @@ class _GraphState extends State<Graph> {
         }
       },
       "xAxis3D": {
-        "type": "value"
+        "type": "value",
+        "min": -1.80,
+        "max": 1.8
       },
       "yAxis3D": {
-        "type": "value"
+        "type": "value",
+        "min": 0,
+        "max": 5.5
       },
       "zAxis3D": {
-        "type": "value"
+        "type": "value",
+        "min": 0,
+        "max": 2.0
       },
       "grid3D": {
         "viewControl": {
@@ -70,11 +126,18 @@ class _GraphState extends State<Graph> {
           "lineStyle": {
             "width": 4
           }
+        },
+        {
+          "type": "line3D",
+          "data": $data2,
+          "lineStyle": {
+            "width": 4,
+            "color": "#ff5733"
+          }
         }
       ]
     }
     ''';
-
     return Container(
       child: Echarts(
         extensions: [glScript],
