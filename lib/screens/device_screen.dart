@@ -1,5 +1,5 @@
 import 'dart:async';
-
+//import '../parent.dart' as globals;
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
@@ -34,7 +34,7 @@ class _DeviceScreenState extends State<DeviceScreen> {
   late StreamSubscription<bool> _isDisconnectingSubscription;
   late StreamSubscription<int> _mtuSubscription;
 
-  List<int> _bleData = []; //added
+  //List<int> _bleData = []; //added
 
   @override
   void initState() {
@@ -177,11 +177,11 @@ class _DeviceScreenState extends State<DeviceScreen> {
       characteristic: c,
       descriptorTiles:
           c.descriptors.map((d) => DescriptorTile(descriptor: d)).toList(),
-      onValueChanged: (List<int> data) {
-        setState(() { //added
-          _bleData = data; //added
-        });
-      },
+      onValueChanged: (List<int> data) {},
+        //setState(() { //added
+          //globals._bleData = data; //added
+       // });
+      //},
     );
   }
 

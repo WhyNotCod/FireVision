@@ -7,7 +7,7 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:collection/collection.dart';
 
 import "../utils/snackbar.dart";
-
+import "../parent.dart" as globals;
 import "descriptor_tile.dart";
 
 class CharacteristicTile extends StatefulWidget {
@@ -41,8 +41,10 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
         temp.add(double.parse(
             (byteData.getFloat32(i, Endian.little)).toStringAsFixed(2)));
       }
-      _value = temp.slices(3).toList(); //value.map((x) => x.toDouble()).toList();
+      _value =
+          temp.slices(3).toList(); //value.map((x) => x.toDouble()).toList();
       //_value = value;
+      globals.bleData = _value;
       if (mounted) {
         setState(() {});
       }

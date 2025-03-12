@@ -3,14 +3,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_echarts/flutter_echarts.dart';
 import 'gl_script.dart' show glScript;
+import 'parent.dart' as globals;
 //import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 //import '../widgets/characteristic_tile.dart';
 
 class Graph extends StatefulWidget {
-  final List<int> bleData; // Add BLE data parameter
+  //final List<int> bleData; // Add BLE data parameter
 
-  const Graph({super.key, required this.bleData});
-
+  //const Graph({super.key, required this.bleData});
+  const Graph({super.key});
   @override
   _GraphState createState() => _GraphState();
 }
