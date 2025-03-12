@@ -34,6 +34,8 @@ class _DeviceScreenState extends State<DeviceScreen> {
   late StreamSubscription<bool> _isDisconnectingSubscription;
   late StreamSubscription<int> _mtuSubscription;
 
+  List<int> _bleData = []; //added
+
   @override
   void initState() {
     super.initState();
@@ -175,7 +177,11 @@ class _DeviceScreenState extends State<DeviceScreen> {
       characteristic: c,
       descriptorTiles:
           c.descriptors.map((d) => DescriptorTile(descriptor: d)).toList(),
-      onValueChanged: (List<int> data) {},
+      onValueChanged: (List<int> data) {
+        setState(() { //added
+          _bleData = data; //added
+        });
+      },
     );
   }
 

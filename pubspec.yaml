@@ -37,6 +37,7 @@ dependencies:
   flutter_cube: ^0.1.0
   flutter_echarts: ^2.5.0
   webview_flutter: ^4.10.0
+  collection: ^1.15.0
   
 
   # The following adds the Cupertino Icons font to your application.
