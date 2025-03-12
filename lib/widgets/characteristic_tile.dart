@@ -7,12 +7,18 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import "../utils/snackbar.dart";
 
 import "descriptor_tile.dart";
+//import "/parent.dart";
 
 class CharacteristicTile extends StatefulWidget {
   final BluetoothCharacteristic characteristic;
   final List<DescriptorTile> descriptorTiles;
 
-  const CharacteristicTile({Key? key, required this.characteristic, required this.descriptorTiles}) : super(key: key);
+  const CharacteristicTile(
+      {Key? key,
+      required this.characteristic,
+      required this.descriptorTiles,
+      required void Function(List<int> data) onValueChanged})
+      : super(key: key);
 
   @override
   State<CharacteristicTile> createState() => _CharacteristicTileState();
@@ -34,6 +40,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
     });
   }
 
+
   @override
   void dispose() {
     _lastValueSubscription.cancel();
@@ -44,7 +51,12 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
 
   List<int> _getRandomBytes() {
     final math = Random();
-    return [math.nextInt(255), math.nextInt(255), math.nextInt(255), math.nextInt(255)];
+    return [
+      math.nextInt(255),
+      math.nextInt(255),
+      math.nextInt(255),
+      math.nextInt(255)
+    ];
   }
 
   Future onReadPressed() async {
@@ -59,7 +71,8 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
 
   Future onWritePressed() async {
     try {
-      await c.write(_getRandomBytes(), withoutResponse: c.properties.writeWithoutResponse);
+      await c.write(_getRandomBytes(),
+          withoutResponse: c.properties.writeWithoutResponse);
       Snackbar.show(ABC.c, "Write: Success", success: true);
       if (c.properties.read) {
         await c.read();
@@ -82,7 +95,8 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
         setState(() {});
       }
     } catch (e) {
-      Snackbar.show(ABC.c, prettyException("Subscribe Error:", e), success: false);
+      Snackbar.show(ABC.c, prettyException("Subscribe Error:", e),
+          success: false);
       print(e);
     }
   }
