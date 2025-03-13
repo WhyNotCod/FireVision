@@ -54,6 +54,7 @@ class _GraphState extends State<Graph> {
 
   @override
   Widget build(BuildContext context) {
+
     String option = '''
     {
       "tooltip": {},

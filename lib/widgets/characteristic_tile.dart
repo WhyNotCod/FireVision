@@ -103,6 +103,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
         //added
         globals.setBleData(strList); // Update this line
         } else {
+
           globals.setBleData([]); // Update this line
         }
       //   globals.bleData = strList; //
@@ -110,9 +111,9 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
       //   globals.bleData = [];
       // }
       
-      if (mounted) {
+      //if (mounted) {
         setState(() {/* Need to change 3D animation */});
-      }
+      //}
     });
   }
 
