@@ -110,8 +110,8 @@ class _GraphState extends State<Graph> {
         option: option,
         reloadAfterInit: true,
       ),
-      width: 250,
-      height: 200,
+      width: 400,
+      height: 350,
     );
   }
 }
