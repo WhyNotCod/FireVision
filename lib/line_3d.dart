@@ -60,7 +60,7 @@ class _GraphState extends State<Graph> {
     {
       "tooltip": {},
       "backgroundColor": "#fff",
-      "visualMap": {
+      "visualMap": max: 20, {
         "show": false,
         "dimension": 2,
         "min": 0,
