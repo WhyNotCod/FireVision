@@ -60,7 +60,7 @@ class _GraphState extends State<Graph> {
     {
       "tooltip": {},
       "backgroundColor": "#fff",
-      "visualMap": max: 20, {
+      "visualMap": {
         "show": false,
         "dimension": 2,
         "min": 0,
@@ -98,8 +98,7 @@ class _GraphState extends State<Graph> {
       },
       "grid3D": {
         "viewControl": {
-          "projection": "orthographic", 
-          "orthographicSize": 100
+          "projection": "orthographic"
         }
       },
       "series": ${globals.bleData}
