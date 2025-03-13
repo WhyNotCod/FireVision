@@ -38,7 +38,7 @@ dependencies:
   flutter_echarts: ^2.5.0
   webview_flutter: ^4.10.0
   collection: ^1.15.0
-  
+  matrices: ^1.2.7
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -64,10 +64,10 @@ flutter:
   assets:
     #- assets/images/fireicon.jpg
     - assets/images/icons8-fire-100.png
-    - assets/file.obj
-    - assets/cube.mtl
-    - assets/name.obj
-    - assets/lightb.mtl
+    - /Users/adkramer/Documents/UMass Amherst/Semester 8 (spring 2025)/ECE 416/app_dev/FireVision/assets/file.obj
+    - /Users/adkramer/Documents/UMass Amherst/Semester 8 (spring 2025)/ECE 416/app_dev/FireVision/assets/cube.mtl
+    - /Users/adkramer/Documents/UMass Amherst/Semester 8 (spring 2025)/ECE 416/app_dev/FireVision/assets/name.obj
+    - /Users/adkramer/Documents/UMass Amherst/Semester 8 (spring 2025)/ECE 416/app_dev/FireVision/assets/lightb.mtl
     - assets/json/replay_1.json
     - assets/echarts.html
     - assets/echarts.min.js

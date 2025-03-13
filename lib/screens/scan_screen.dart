@@ -63,7 +63,7 @@ class _ScanScreenState extends State<ScanScreen> {
       print(e);
     }
     try {
-      var withNames = ["FireVision_Device"];
+      var withNames = ["FireVision_Device", "FloatArray_Device"]; //limit discoverable BLE devices
       await FlutterBluePlus.startScan(
         timeout: const Duration(seconds: 15),
         withNames: withNames,

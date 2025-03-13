@@ -79,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                 print('Navigating to Render'); // Debugging print statement
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => Graph(bleData: []),
+                    builder: (context) => Graph(),
                   ),
                 );
               },
