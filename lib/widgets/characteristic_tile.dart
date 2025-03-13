@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:collection/collection.dart';
 import 'package:matrices/matrices.dart';
-
+import '/ble_service.dart';
 import "../utils/snackbar.dart";
 import "../parent.dart" as globals;
 import "descriptor_tile.dart";
@@ -26,109 +26,15 @@ class CharacteristicTile extends StatefulWidget {
 }
 
 class _CharacteristicTileState extends State<CharacteristicTile> {
-  List<List<double>> _value = [];
-
-  late StreamSubscription<List<int>> _lastValueSubscription;
-  final transMat = Matrix.fromList([
-    [-0.5, -0.5, 0],
-    [0.5, -0.5, 0],
-    [0.5, -0.5, 1],
-    [-0.5, -0.5, 1],
-    [-0.5, -0.5, 0],
-    [-0.5, 0.5, 0],
-    [0.5, 0.5, 0],
-    [0.5, -0.5, 0],
-    [0.5, -0.5, 1],
-    [0.5, 0.5, 1],
-    [0.5, 0.5, 0],
-    [-0.5, 0.5, 0],
-    [-0.5, 0.5, 1],
-    [-0.5, -0.5, 1],
-    [0.5, -0.5, 1],
-    [0.5, 0.5, 1],
-    [-0.5, 0.5, 1]
-  ]);
-  Matrix newMat = Matrix.fromList([
-    [-0.5, -0.5, 0],
-    [0.5, -0.5, 0],
-    [0.5, -0.5, 1],
-    [-0.5, -0.5, 1],
-    [-0.5, -0.5, 0],
-    [-0.5, 0.5, 0],
-    [0.5, 0.5, 0],
-    [0.5, -0.5, 0],
-    [0.5, -0.5, 1],
-    [0.5, 0.5, 1],
-    [0.5, 0.5, 0],
-    [-0.5, 0.5, 0],
-    [-0.5, 0.5, 1],
-    [-0.5, -0.5, 1],
-    [0.5, -0.5, 1],
-    [0.5, 0.5, 1],
-    [-0.5, 0.5, 1]
-  ]);
   @override
   void initState() {
     super.initState();
-    _lastValueSubscription =
-        widget.characteristic.lastValueStream.listen((value) {
-      final bytes = Uint8List.fromList(value);
-      final byteData = ByteData.sublistView(bytes);
-      List<double> temp = [];
-      for (var i = 0; i < value.length; i += 4) {
-        temp.add(double.parse(
-            (byteData.getFloat32(i, Endian.little)).toStringAsFixed(2)));
-      }
-      _value =
-          temp.slices(3).toList(); //value.map((x) => x.toDouble()).toList();
-      //_value = value;
-
-      if (_value.isNotEmpty) {
-        var tmpNewMat = [];
-        for (var i = 0; i < _value.length; i++) {
-          var newMat = transMat;
-          double x = _value[i][0];
-          double y = _value[i][1];
-          double z = _value[i][2];
-          newMat = updateData(newMat, x, y, z);
-          tmpNewMat.add(newMat.matrix);
-        }
-
-        var strList = tmpNewMat
-            .map((e) =>
-                '{"type": "line3D","data": $e,"lineStyle": {"width": 4,"color": "#ff5733"}}')
-            .toList();
-        print("String List: ");
-        print(strList); //testing if string updates
-        //added
-        globals.setBleData(strList); // Update this line
-        } else {
-
-          globals.setBleData([]); // Update this line
-        }
-      //   globals.bleData = strList; //
-      // } else {
-      //   globals.bleData = [];
-      // }
-      
-      //if (mounted) {
-        setState(() {/* Need to change 3D animation */});
-      //}
-    });
-  }
-
-  Matrix updateData(Matrix data, double x, double y, double z) {
-    //data[-2] = (Matrix.fromList([data[-2]]) * z)[0]; // set height
-    data[-2] = [0, 0, z, z, 0, 0, 0, 0, z, z, 0, 0, z, z, z, z, z];
-    var tMat =
-        Matrix.fromList(List.generate(17, (i) => [x, y, 0], growable: false));
-    data = data + tMat;
-    return data;
+    BleService().startListening(widget.characteristic);
   }
 
   @override
   void dispose() {
-    _lastValueSubscription.cancel();
+    BleService().stopListening();
     super.dispose();
   }
 
@@ -192,7 +98,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
   }
 
   Widget buildValue(BuildContext context) {
-    String data = _value.toString();
+    String data = BleService().value.toString();
     return Text(data, style: TextStyle(fontSize: 13, color: Colors.grey));
   }
 
