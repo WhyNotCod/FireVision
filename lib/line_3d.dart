@@ -36,7 +36,7 @@ class _GraphState extends State<Graph> {
   //   [0, 1, 2]
   // ];
   //Added
-  
+
   //added
   @override
   void initState() {
@@ -50,11 +50,12 @@ class _GraphState extends State<Graph> {
   void dispose() {
     globals.onBleDataChanged = null;
     super.dispose();
-  } ///----------------------
+  }
+
+  ///----------------------
 
   @override
   Widget build(BuildContext context) {
-
     String option = '''
     {
       "tooltip": {},
@@ -109,8 +110,8 @@ class _GraphState extends State<Graph> {
         option: option,
         reloadAfterInit: true,
       ),
-      width: 300,
-      height: 250,
+      width: 250,
+      height: 200,
     );
   }
 }
