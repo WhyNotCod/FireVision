@@ -98,7 +98,8 @@ class _GraphState extends State<Graph> {
       },
       "grid3D": {
         "viewControl": {
-          "projection": "orthographic"
+          "projection": "orthographic", 
+          "orthographicSize": 100
         }
       },
       "series": ${globals.bleData}
