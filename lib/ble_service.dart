@@ -6,7 +6,7 @@ import '../parent.dart' as globals;
 import 'package:collection/collection.dart';
 
 class BleService {
-  static final BleService _instance = BleService._internal();
+  static final BleService _instance = BleService._internal(); //
   factory BleService() => _instance;
   BleService._internal();
 
@@ -59,11 +59,11 @@ class BleService {
             .map((e) =>
                 '{"type": "line3D","data": $e,"lineStyle": {"width": 4,"color": "#ff5733"}}')
             .toList();
-        print("String List");
-        print(strList);
+        // print("String List");
+        // print(strList);
         globals.setBleData(strList);
       } else {
-        print("hey buddy");
+        //print("hey buddy");
         globals.setBleData([]);
       }
     });

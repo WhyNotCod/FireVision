@@ -109,7 +109,7 @@ class _GraphState extends State<Graph> {
       child: Echarts(
         extensions: [glScript],
         option: option,
-        reloadAfterInit: true,
+        reloadAfterInit: false,
       ),
       width: 300,
       height: 50,
