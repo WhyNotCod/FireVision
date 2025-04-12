@@ -16,11 +16,10 @@ class CharacteristicTile extends StatefulWidget {
   final List<DescriptorTile> descriptorTiles;
 
   const CharacteristicTile(
-      {Key? key,
+      {super.key,
       required this.characteristic,
       required this.descriptorTiles,
-      required void Function(List<int> data) onValueChanged})
-      : super(key: key);
+      required void Function(List<int> data) onValueChanged});
   @override
   State<CharacteristicTile> createState() => _CharacteristicTileState();
 }

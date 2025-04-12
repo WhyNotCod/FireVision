@@ -105,7 +105,7 @@ class _GraphState extends State<Graph> {
       "series": ${globals.bleData}
     }
     ''';
-    return Container(
+    return SizedBox(
       child: Echarts(
         extensions: [glScript],
         option: option,
