@@ -48,7 +48,7 @@ class _FlutterBlueAppState extends State<MyApp> {
         : BluetoothOffScreen(adapterState: _adapterState);
 
     return MaterialApp(
-      color: const Color.fromARGB(255, 190, 98, 12),
+      color: const Color.fromARGB(255, 137, 17, 6),
       title: 'FireVisions',
       home: HomeScreen(screen: screen),
       navigatorObservers: [BluetoothAdapterStateObserver()],
@@ -72,8 +72,7 @@ class HomeScreen extends StatelessWidget {
       body: Center(
         child: Column(
           children: <Widget>[
-            Image.asset('assets/images/icons8-fire-100.png',
-                height: 200, scale: 2),
+            Image.asset('assets/images/logo.png', height: 200, scale: 4),
             ElevatedButton(
               onPressed: () {
                 print('Navigating to Render'); // Debugging print statement
