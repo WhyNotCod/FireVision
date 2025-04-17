@@ -52,10 +52,10 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
   Future onReadPressed() async {
     try {
       await c.read();
-      Snackbar.show(ABC.c, "Read: Success", success: true);
+      //Snackbar.show(ABC.c, "Read: Success", success: true);
     } catch (e) {
-      Snackbar.show(ABC.c, prettyException("Read Error:", e), success: false);
-      print(e);
+      //Snackbar.show(ABC.c, prettyException("Read Error:", e), success: false);
+      //print(e);
     }
   }
 
@@ -63,21 +63,21 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
     try {
       await c.write(_getRandomBytes(),
           withoutResponse: c.properties.writeWithoutResponse);
-      Snackbar.show(ABC.c, "Write: Success", success: true);
+      //   Snackbar.show(ABC.c, "Write: Success", success: true);
       if (c.properties.read) {
         await c.read();
       }
     } catch (e) {
-      Snackbar.show(ABC.c, prettyException("Write Error:", e), success: false);
-      print(e);
+      // Snackbar.show(ABC.c, prettyException("Write Error:", e), success: false);
+      // print(e);
     }
   }
 
   Future onSubscribePressed() async {
     try {
-      String op = c.isNotifying == false ? "Subscribe" : "Unubscribe";
+      // String op = c.isNotifying == false ? "Subscribe" : "Unubscribe";
       await c.setNotifyValue(c.isNotifying == false);
-      Snackbar.show(ABC.c, "$op : Success", success: true);
+      // Snackbar.show(ABC.c, "$op : Success", success: true);
       if (c.properties.read) {
         await c.read();
       }
@@ -85,9 +85,9 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
         setState(() {});
       }
     } catch (e) {
-      Snackbar.show(ABC.c, prettyException("Subscribe Error:", e),
-          success: false);
-      print(e);
+      // Snackbar.show(ABC.c, prettyException("Subscribe Error:", e),
+      //     success: false);
+      //print(e);
     }
   }
 
@@ -103,13 +103,14 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
 
   Widget buildReadButton(BuildContext context) {
     return TextButton(
-        child: Text("Read"),
+        child: const Text("Read"),
         onPressed: () async {
           await onReadPressed();
           if (mounted) {
             setState(() {});
           }
-        });
+        }
+        );
   }
 
   Widget buildWriteButton(BuildContext context) {
