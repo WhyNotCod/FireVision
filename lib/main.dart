@@ -61,7 +61,7 @@ class _FlutterBlueAppState extends State<MyApp> {
 class HomeScreen extends StatelessWidget {
   final Widget screen;
 
-  const HomeScreen({Key? key, required this.screen}) : super(key: key);
+  const HomeScreen({super.key, required this.screen});
 
   @override
   Widget build(BuildContext context) {

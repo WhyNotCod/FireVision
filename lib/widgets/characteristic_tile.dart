@@ -1,14 +1,9 @@
 import 'dart:async';
 import 'dart:math';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
-import 'package:collection/collection.dart';
-import 'package:matrices/matrices.dart';
 import '/ble_service.dart';
-import "../utils/snackbar.dart";
-import "../parent.dart" as globals;
 import "descriptor_tile.dart";
 
 class CharacteristicTile extends StatefulWidget {

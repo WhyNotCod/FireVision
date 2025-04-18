@@ -83,16 +83,19 @@ class _GraphState extends State<Graph> {
       },
       "xAxis3D": {
         "type": "value",
+        name: "Width",
         "min": -4.0,
         "max": 4.0
       },
       "yAxis3D": {
         "type": "value",
+        name: "depth",
         "min": 0,
         "max": 8.0
       },
       "zAxis3D": {
         "type": "value",
+        name: "Height",
         "min": 0,
         "max": 3.0
       },
@@ -106,13 +109,13 @@ class _GraphState extends State<Graph> {
     }
     ''';
     return SizedBox(
+      width: 300,
+      height: 50,
       child: Echarts(
         extensions: [glScript],
         option: option,
         reloadAfterInit: true,
       ),
-      width: 300,
-      height: 50,
     );
   }
 }
