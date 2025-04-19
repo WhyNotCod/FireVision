@@ -28,7 +28,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
 
   @override
   void dispose() {
-    BleService().stopListening();
+    //BleService().stopListening();
     super.dispose();
   }
 
@@ -104,8 +104,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
           if (mounted) {
             setState(() {});
           }
-        }
-        );
+        });
   }
 
   Widget buildWriteButton(BuildContext context) {
