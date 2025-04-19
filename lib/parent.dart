@@ -1,4 +1,4 @@
-library;
+library globals;
 
 List<String> bleData = [];
 //added

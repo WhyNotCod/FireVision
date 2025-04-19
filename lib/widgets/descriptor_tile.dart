@@ -47,7 +47,7 @@ class _DescriptorTileState extends State<DescriptorTile> {
   Future onReadPressed() async {
     try {
       await d.read();
-      Snackbar.show(ABC.c, "Descriptor Read : Success", success: true);
+      //Snackbar.show(ABC.c, "Descriptor Read : Success", success: true);
     } catch (e) {
       Snackbar.show(ABC.c, prettyException("Descriptor Read Error:", e), success: false);
       print(e);
