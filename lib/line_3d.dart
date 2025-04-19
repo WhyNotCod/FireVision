@@ -54,7 +54,7 @@ class _GraphState extends State<Graph> {
 
   ///----------------------
 
-  @override
+  @override //added realtime
   Widget build(BuildContext context) {
     String option = '''
     {
@@ -65,6 +65,7 @@ class _GraphState extends State<Graph> {
         "dimension": 2,
         "min": 0,
         "max": 30,
+        realTime: true,
         "inRange": {
           "color": [
             "#313695",
