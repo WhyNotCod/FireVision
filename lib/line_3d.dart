@@ -1,10 +1,13 @@
 // import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:flutter_echarts/flutter_echarts.dart';
-import 'gl_script.dart' show glScript;
+//import 'gl_script.dart' show glScript;
 import 'parent.dart' as globals;
 //import 'package:flutter_blue_plus/flutter_blue_plus.dart';
-//import '../widgets/characteristic_tile.dart';
+import '../widgets/characteristic_tile.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'ble_service.dart';
+import "widgets/descriptor_tile.dart";
 
 class Graph extends StatefulWidget {
   //final List<int> bleData; // Add BLE data parameter
@@ -90,13 +93,13 @@ class _GraphState extends State<Graph> {
       },
       "yAxis3D": {
         "type": "value",
-        name: "depth",
+        name: "Depth",
         "min": 0,
         "max": 8.0
       },
       "zAxis3D": {
         "type": "value",
-        name: "Height",
+        name: "H",
         "min": 0,
         "max": 3.0
       },
@@ -109,18 +112,65 @@ class _GraphState extends State<Graph> {
       "series": ${globals.bleData}
     }
     ''';
-    return SizedBox(
-      width: 300,
-      height: 50,
-      child: Echarts(
-        extensions: [glScript],
-        option: option,
-        reloadAfterInit: true,
+    //added
+    return Scaffold(
+      body: Stack(
+        children: [
+          Center(
+            child: SizedBox(
+              width: 300,
+              height: 250,
+              child: Echarts(
+                option: option,
+                reloadAfterInit: true,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 20,
+            left: 20,
+            child: GestureDetector(
+              onTap: () {
+                // Add your button action here
+                //print("Circular button pressed");
+                //await onWritePressed();
+              },
+              child: Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.blue, // Background color of the circle
+                  shape: BoxShape.circle,
+                ),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 20,
+                        height: 2,
+                        color: Colors.white, // Line color
+                      ),
+                      SizedBox(height: 4), // Spacing between lines
+                      Container(
+                        width: 20,
+                        height: 2,
+                        color: Colors.white,
+                      ),
+                      SizedBox(height: 4),
+                      Container(
+                        width: 20,
+                        height: 2,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
 }
-
-// extension on int {
-//   get length => null;
-// }

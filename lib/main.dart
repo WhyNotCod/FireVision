@@ -5,6 +5,7 @@ import 'line_3d.dart';
 //import 'package:fire_vision/render.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'ble_service.dart';
 
 void main() {
   FlutterBluePlus.setLogLevel(LogLevel.verbose, color: true);
@@ -26,6 +27,7 @@ class _FlutterBlueAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    
     _adapterStateStateSubscription =
         FlutterBluePlus.adapterState.listen((state) {
       _adapterState = state;
@@ -58,10 +60,98 @@ class _FlutterBlueAppState extends State<MyApp> {
 //wait so would this just be a simple fix of just extracting the scaffold into another class ?
 //Essentially, the context belongs to the Widget class. And when searching for inherited widgets, it can only search up the tree from that Widget
 
+// class HomeScreen extends StatelessWidget {
+//   final Widget screen;
+
+//   const HomeScreen({super.key, required this.screen});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text("FireVision"),
+//       ),
+//       body: Center(
+//         child: Column(
+//           children: <Widget>[
+//             Image.asset('assets/images/logo.png', height: 200, scale: 4),
+//             ElevatedButton(
+//               onPressed: () {
+//                 print('Navigating to Render'); // Debugging print statement
+//                 Navigator.of(context).push(
+//                   MaterialPageRoute(
+//                     builder: (context) => Graph(),
+//                   ),
+//                 );
+//               },
+//               child: const Text('3D Render'),
+//             ),
+//             Expanded(child: screen),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
 class HomeScreen extends StatelessWidget {
   final Widget screen;
 
   const HomeScreen({super.key, required this.screen});
+
+  Future<void> _connectAndSubscribe() async {
+    try {
+      // Start scanning for devices with specific names
+      await FlutterBluePlus.startScan(
+        timeout: const Duration(seconds: 15),
+        withNames: ["FireVision_Device", "FloatArray_Device"],
+      );
+
+      // Listen for scan results
+      FlutterBluePlus.scanResults.listen((results) async {
+        for (ScanResult result in results) {
+          final device = result.device;
+
+          // Connect to the device
+          await device.connect();
+
+          // Discover services
+          List<BluetoothService> services = await device.discoverServices();
+
+          // Look for the service with GUID 0x0FF
+          for (BluetoothService service in services) {
+            print("Help ${service.uuid}");
+            if (service.serviceUuid == Guid("00FF")) {
+              print("Service 0x0FF found!");
+
+              // Look for the characteristic 0xFF03
+              for (BluetoothCharacteristic characteristic in service.characteristics) {
+                if (characteristic.uuid == Guid("FF03")) {
+                  print("Characteristic 0xFF03 found!");
+
+                  // Subscribe to the characteristic
+                  await characteristic.setNotifyValue(true);
+                  BleService().startListening(characteristic);
+                  if (characteristic.properties.read) {
+                    await characteristic.read();
+                  }
+
+
+                  // Stop scanning and return after successful subscription
+                  await FlutterBluePlus.stopScan();
+                  return;
+                }
+              }
+            }
+          }
+
+          // Disconnect if the service or characteristic is not found
+          await device.disconnect();
+        }
+      });
+    } catch (e) {
+      print("Error connecting to device or subscribing to characteristic: $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,6 +173,10 @@ class HomeScreen extends StatelessWidget {
                 );
               },
               child: const Text('3D Render'),
+            ),
+            ElevatedButton(
+              onPressed: _connectAndSubscribe,
+              child: const Text('Connect'),
             ),
             Expanded(child: screen),
           ],

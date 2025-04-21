@@ -38,9 +38,9 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
     final math = Random();
     return [
       math.nextInt(255),
-      math.nextInt(255),
-      math.nextInt(255),
-      math.nextInt(255)
+      // math.nextInt(255),
+      // math.nextInt(255),
+      // math.nextInt(255)
     ];
   }
 
