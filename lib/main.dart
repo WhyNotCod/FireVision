@@ -27,7 +27,7 @@ class _FlutterBlueAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    
+
     _adapterStateStateSubscription =
         FlutterBluePlus.adapterState.listen((state) {
       _adapterState = state;
@@ -57,42 +57,7 @@ class _FlutterBlueAppState extends State<MyApp> {
     );
   }
 }
-//wait so would this just be a simple fix of just extracting the scaffold into another class ?
-//Essentially, the context belongs to the Widget class. And when searching for inherited widgets, it can only search up the tree from that Widget
 
-// class HomeScreen extends StatelessWidget {
-//   final Widget screen;
-
-//   const HomeScreen({super.key, required this.screen});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text("FireVision"),
-//       ),
-//       body: Center(
-//         child: Column(
-//           children: <Widget>[
-//             Image.asset('assets/images/logo.png', height: 200, scale: 4),
-//             ElevatedButton(
-//               onPressed: () {
-//                 print('Navigating to Render'); // Debugging print statement
-//                 Navigator.of(context).push(
-//                   MaterialPageRoute(
-//                     builder: (context) => Graph(),
-//                   ),
-//                 );
-//               },
-//               child: const Text('3D Render'),
-//             ),
-//             Expanded(child: screen),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
 class HomeScreen extends StatelessWidget {
   final Widget screen;
 
@@ -124,7 +89,8 @@ class HomeScreen extends StatelessWidget {
               print("Service 0x0FF found!");
 
               // Look for the characteristic 0xFF03
-              for (BluetoothCharacteristic characteristic in service.characteristics) {
+              for (BluetoothCharacteristic characteristic
+                  in service.characteristics) {
                 if (characteristic.uuid == Guid("FF03")) {
                   print("Characteristic 0xFF03 found!");
 
@@ -134,7 +100,6 @@ class HomeScreen extends StatelessWidget {
                   if (characteristic.properties.read) {
                     await characteristic.read();
                   }
-
 
                   // Stop scanning and return after successful subscription
                   await FlutterBluePlus.stopScan();
@@ -179,6 +144,12 @@ class HomeScreen extends StatelessWidget {
               child: const Text('Connect'),
             ),
             Expanded(child: screen),
+            //added image
+            Image.asset(
+              'assets/images/house_on_fire.jpg', // Replace with your image path
+              height: 100, // Adjust the height as needed
+              scale: 2, // Adjust the scale as needed
+            ),
           ],
         ),
       ),
