@@ -19,6 +19,7 @@ class Graph extends StatefulWidget {
 }
 
 class _GraphState extends State<Graph> {
+  BluetoothCharacteristic? _characteristic; // Define the _characteristic variable
   // List<List<double>> data = [
   //   [0, 0, 0],
   //   [1, 0, 0],
@@ -40,6 +41,15 @@ class _GraphState extends State<Graph> {
   // ];
   //Added
 
+  Future<void> onWritePressed(BluetoothCharacteristic characteristic) async {
+    try {
+      // Write the value 255 (1 byte) to the characteristic
+      await characteristic.write([255], withoutResponse: true);
+      print("Successfully wrote 255 to the characteristic.");
+    } catch (e) {
+      print("Error writing to characteristic: $e");
+    }
+  }
   //added
   @override
   void initState() {
@@ -130,10 +140,14 @@ class _GraphState extends State<Graph> {
             bottom: 20,
             left: 20,
             child: GestureDetector(
-              onTap: () {
+              onTap: () async{
                 // Add your button action here
                 //print("Circular button pressed");
-                //await onWritePressed();
+                if (_characteristic != null) {
+                  await onWritePressed(_characteristic!);
+                } else {
+                  print("Characteristic is null");
+                }
               },
               child: Container(
                 width: 50,
