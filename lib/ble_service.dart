@@ -38,10 +38,19 @@ class BleService {
       final bytes = Uint8List.fromList(value);
       final byteData = ByteData.sublistView(bytes);
       List<double> temp = [];
+      List<String> colorList = [];
       for (var i = 0; i < value.length; i += 4) {
+        if (i == 12 || i == 28 || i == 44 || i == 60 || i == 76) {
+          colorList.add(bytes
+              .sublist(i, i + 3)
+              .map((b) => b.toRadixString(16).padLeft(2, '0'))
+              .join());
+          continue;
+        }
         temp.add(double.parse(
             (byteData.getFloat32(i, Endian.little)).toStringAsFixed(2)));
       }
+      //print(colorList);
       _value = temp.slices(3).toList();
 
       if (_value.isNotEmpty) {
@@ -55,10 +64,17 @@ class BleService {
           tmpNewMat.add(newMat.matrix);
         }
 
+        // var strList = tmpNewMat
+        //     .map((e) =>
+        //         '{"type": "line3D","data": $e,"lineStyle": {"width": 4,"color": "#ff5733"}}')
+        //     .toList();
         var strList = tmpNewMat
-            .map((e) =>
-                '{"type": "line3D","data": $e,"lineStyle": {"width": 4,"color": "#ff5733"}}')
+            .asMap()
+            .entries
+            .map((entry) =>
+                '{"type": "line3D","data": ${entry.value}, "lineStyle": {"width": 4,"color": "#${colorList[entry.key]}"}}')
             .toList();
+        print(strList);
         // print("String List");
         // print(strList);
         globals.setBleData(strList);

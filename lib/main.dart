@@ -58,10 +58,17 @@ class _FlutterBlueAppState extends State<MyApp> {
   }
 }
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   final Widget screen;
 
   const HomeScreen({super.key, required this.screen});
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  BluetoothCharacteristic? _characteristicFF03;
 
   Future<void> _connectAndSubscribe() async {
     try {
@@ -91,8 +98,8 @@ class HomeScreen extends StatelessWidget {
               // Look for the characteristic 0xFF03
               for (BluetoothCharacteristic characteristic
                   in service.characteristics) {
-                if (characteristic.uuid == Guid("FF03")) {
-                  print("Characteristic 0xFF03 found!");
+                if (characteristic.uuid == Guid("FF02")) {
+                  print("Characteristic 0xFF02 found!");
 
                   // Subscribe to the characteristic
                   await characteristic.setNotifyValue(true);
@@ -100,6 +107,16 @@ class HomeScreen extends StatelessWidget {
                   if (characteristic.properties.read) {
                     await characteristic.read();
                   }
+
+                  // Stop scanning and return after successful subscription
+                  // await FlutterBluePlus.stopScan();
+                  // return;
+                }
+                if (characteristic.uuid == Guid("FF03")) {
+                  print("Characteristic 0xFF03 found!");
+                  setState(() {
+                    _characteristicFF03 = characteristic;
+                  });
 
                   // Stop scanning and return after successful subscription
                   await FlutterBluePlus.stopScan();
@@ -127,13 +144,15 @@ class HomeScreen extends StatelessWidget {
       body: Center(
         child: Column(
           children: <Widget>[
+            const Spacer(flex: 1),
             Image.asset('assets/images/logo.png', height: 200, scale: 4),
             ElevatedButton(
               onPressed: () {
                 print('Navigating to Render'); // Debugging print statement
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => Graph(),
+                    builder: (context) =>
+                        Graph(characteristic: _characteristicFF03),
                   ),
                 );
               },
@@ -143,8 +162,7 @@ class HomeScreen extends StatelessWidget {
               onPressed: _connectAndSubscribe,
               child: const Text('Connect'),
             ),
-            Expanded(child: screen),
-            //added image
+            Expanded(child: widget.screen),
             Image.asset(
               'assets/images/house_on_fire.jpg', // Replace with your image path
               height: 100, // Adjust the height as needed
