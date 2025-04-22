@@ -144,6 +144,12 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Center(
         child: Column(
           children: <Widget>[
+            Container(
+              height: 50, // Adjust the height as needed
+              width:
+                  double.infinity, // Make it span the full width of the screen
+              color: const Color.fromARGB(255, 137, 17, 6), // Solid color
+            ),
             const Spacer(flex: 1),
             Image.asset('assets/images/logo.png', height: 200, scale: 4),
             ElevatedButton(
