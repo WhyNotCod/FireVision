@@ -1,7 +1,7 @@
 // import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:flutter_echarts/flutter_echarts.dart';
-//import 'gl_script.dart' show glScript;
+import 'gl_script.dart' show glScript;
 import 'parent.dart' as globals;
 //import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import '../widgets/characteristic_tile.dart';
@@ -19,7 +19,8 @@ class Graph extends StatefulWidget {
 }
 
 class _GraphState extends State<Graph> {
-  BluetoothCharacteristic? _characteristic; // Define the _characteristic variable
+  BluetoothCharacteristic?
+      _characteristic; // Define the _characteristic variable
   // List<List<double>> data = [
   //   [0, 0, 0],
   //   [1, 0, 0],
@@ -50,6 +51,7 @@ class _GraphState extends State<Graph> {
       print("Error writing to characteristic: $e");
     }
   }
+
   //added
   @override
   void initState() {
@@ -140,7 +142,7 @@ class _GraphState extends State<Graph> {
             bottom: 20,
             left: 20,
             child: GestureDetector(
-              onTap: () async{
+              onTap: () async {
                 // Add your button action here
                 //print("Circular button pressed");
                 if (_characteristic != null) {
