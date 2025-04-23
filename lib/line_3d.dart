@@ -1,32 +1,27 @@
-// import 'dart:ffi';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_echarts/flutter_echarts.dart';
 import 'gl_script.dart' show glScript;
 import 'parent.dart' as globals;
-//import 'package:flutter_blue_plus/flutter_blue_plus.dart';
-import '../widgets/characteristic_tile.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
-import 'ble_service.dart';
-import "widgets/descriptor_tile.dart";
-import 'dart:math';
 
 class Graph extends StatefulWidget {
-  final BluetoothCharacteristic? characteristic;// Add BLE data parameter
-
   const Graph({super.key, required this.characteristic});
-  //const Graph({super.key});
   @override
   _GraphState createState() => _GraphState();
+  final BluetoothCharacteristic? characteristic; // Add BLE data parameter
 }
 
 class _GraphState extends State<Graph> {
-  BluetoothCharacteristic? _characteristic; // Define the _characteristic variable
-  int _selectedValue = 0; // Default selected value
+  Key _chartKey = UniqueKey();
+  BluetoothCharacteristic? _characteristic; 
+  final GlobalKey _echartContainerKey = GlobalKey();
 
   @override
   void initState() {
     super.initState();
-    _characteristic = widget.characteristic; // Assign the passed characteristic
+    _characteristic = widget.characteristic;
     globals.onBleDataChanged = () {
       setState(() {});
     };
@@ -36,16 +31,6 @@ class _GraphState extends State<Graph> {
   void dispose() {
     globals.onBleDataChanged = null;
     super.dispose();
-  }
-
-  Future<void> onWritePressed(BluetoothCharacteristic characteristic, int value) async {
-    try {
-      // Write the selected value (0, 1, or 2) to the characteristic
-      await characteristic.write([value], withoutResponse: true);
-      print("Successfully wrote $value to the characteristic.");
-    } catch (e) {
-      print("Error writing to characteristic: $e");
-    }
   }
 
   @override
@@ -68,259 +53,50 @@ class _GraphState extends State<Graph> {
       },
       "zAxis3D": {
         "type": "value",
-        "name": "H",
+        "name": "Height",
         "min": 0,
         "max": 3.0
       },
       "grid3D": {
         "viewControl": {
           "projection": "orthographic",
-          "orthographicSize": 350
+          "orthographicSize": 400
         }
       },
       "series": ${globals.bleData}
     }
     ''';
 
-    return Scaffold(
-      body: Stack(
-        children: [
-          Center(
-            child: SizedBox(
-              width: 300,
-              height: 250,
-              child: Echarts(
-                option: option,
-                reloadAfterInit: true,
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 20,
-            left: 20,
-            child: Column(
-              children: [
-                // Dropdown menu for selecting the value
-                DropdownButton<int>(
-                  value: _selectedValue,
-                  items: [
-                    DropdownMenuItem(value: 0, child: Text("Normal")),
-                    DropdownMenuItem(value: 1, child: Text("ghost Removal")),
-                    DropdownMenuItem(value: 2, child: Text("Show Ghosts")),
-                  ],
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedValue = value!;
-                    });
-                  },
-                ),
-                SizedBox(height: 10), // Spacing between dropdown and button
-                GestureDetector(
-                  onTap: () async {
-                    if (_characteristic != null) {
-                      await onWritePressed(_characteristic!, _selectedValue);
-                    } else {
-                      print("Characteristic is null");
-                    }
-                  },
-                  child: Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Colors.blue, // Background color of the circle
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 20,
-                            height: 2,
-                            color: Colors.white, // Line color
-                          ),
-                          SizedBox(height: 4), // Spacing between lines
-                          Container(
-                            width: 20,
-                            height: 2,
-                            color: Colors.white,
-                          ),
-                          SizedBox(height: 4),
-                          Container(
-                            width: 20,
-                            height: 2,
-                            color: Colors.white,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(seconds: 2), () {
+        final renderBox = _echartContainerKey.currentContext?.findRenderObject() as RenderBox?;
+        if (renderBox != null && renderBox.size.height < 10) {
+          print("HEEEEELP");
+          setState(() {
+            _chartKey = UniqueKey();
+          });
+        }
+      });
+    });
+
+    return SizedBox(
+      width: 300,
+      height: 300,
+      child: Container(
+        key: _echartContainerKey,
+        child: Echarts(
+          key: _chartKey,
+          extensions: [glScript],
+          option: option,
+          reloadAfterInit: false,
+          onWebResourceError: (controller, error) {
+            print("Callback Error: $error");
+            setState(() {
+            _chartKey = UniqueKey();
+          });
+          },
+        ),
       ),
     );
   }
 }
-// class _GraphState extends State<Graph> {
-//   BluetoothCharacteristic?
-//       _characteristic; // Define the _characteristic variable
-//   // List<List<double>> data = [
-//   //   [0, 0, 0],
-//   //   [1, 0, 0],
-//   //   [1, 0, 2],
-//   //   [0, 0, 2],
-//   //   [0, 0, 0],
-//   //   [0, 1, 0],
-//   //   [1, 1, 0],
-//   //   [1, 0, 0],
-//   //   [1, 0, 2],
-//   //   [1, 1, 2],
-//   //   [1, 1, 0],
-//   //   [0, 1, 0],
-//   //   [0, 1, 2],
-//   //   [0, 0, 2],
-//   //   [1, 0, 2],
-//   //   [1, 1, 2],
-//   //   [0, 1, 2]
-//   // ];
-//   //Added
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _characteristic = widget.characteristic; // Assign the passed characteristic
-//     globals.onBleDataChanged = () {
-//       setState(() {});
-//     };
-//   }
-
-//   @override
-//   void dispose() {
-//     globals.onBleDataChanged = null;
-//     super.dispose();
-//   }
-
-//   List<int> _getRandomBytes() {
-//     final math = Random();
-//     return [
-//       math.nextInt(255),
-//       // math.nextInt(255),
-//       // math.nextInt(255),
-//       // math.nextInt(255)
-//     ];
-//   }
-
-//   Future<void> onWritePressed(BluetoothCharacteristic characteristic) async {
-//     try {
-//       // Write the value 255 (1 byte) to the characteristic
-//       await characteristic.write(_getRandomBytes(), withoutResponse: true);
-//       print("Successfully wrote 255 to the characteristic.");
-//     } catch (e) {
-//       print("Error writing to characteristic: $e");
-//     }
-//   }
-
-//   ///----------------------
-
-//   @override //added realtime
-//   Widget build(BuildContext context) {
-//     String option = '''
-//     {
-//       "tooltip": {},
-//       "backgroundColor": "#fff",
-//       "xAxis3D": {
-//         "type": "value",
-//         name: "Width",
-//         "min": -4.0,
-//         "max": 4.0
-//       },
-//       "yAxis3D": {
-//         "type": "value",
-//         name: "Depth",
-//         "min": 0,
-//         "max": 8.0
-//       },
-//       "zAxis3D": {
-//         "type": "value",
-//         name: "H",
-//         "min": 0,
-//         "max": 3.0
-//       },
-//       "grid3D": {
-//         "viewControl": {
-//           "projection": "orthographic",
-//           "orthographicSize": 350
-//         }
-//       },
-//       "series": ${globals.bleData}
-//     }
-//     ''';
-//     //added
-//     return Scaffold(
-//       body: Stack(
-//         children: [
-//           Center(
-//             child: SizedBox(
-//               width: 300,
-//               height: 250,
-//               child: Echarts(
-//                 option: option,
-//                 reloadAfterInit: true,
-//               ),
-//             ),
-//           ),
-//           Positioned(
-//             bottom: 20,
-//             left: 20,
-//             child: GestureDetector(
-//               onTap: () async {
-//                 // Add your button action here
-//                 //print("Circular button pressed");
-//                 if (_characteristic != null) {
-//                   await onWritePressed(_characteristic!);
-//                 } else {
-//                   print("Characteristic is null");
-//                 }
-//               },
-//               child: Container(
-//                 width: 50,
-//                 height: 50,
-//                 decoration: BoxDecoration(
-//                   color: Colors.blue, // Background color of the circle
-//                   shape: BoxShape.circle,
-//                 ),
-//                 child: Center(
-//                   child: Column(
-//                     mainAxisAlignment: MainAxisAlignment.center,
-//                     children: [
-//                       Container(
-//                         width: 20,
-//                         height: 2,
-//                         color: Colors.white, // Line color
-//                       ),
-//                       SizedBox(height: 4), // Spacing between lines
-//                       Container(
-//                         width: 20,
-//                         height: 2,
-//                         color: Colors.white,
-//                       ),
-//                       SizedBox(height: 4),
-//                       Container(
-//                         width: 20,
-//                         height: 2,
-//                         color: Colors.white,
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
