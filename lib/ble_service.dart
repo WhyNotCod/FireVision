@@ -64,10 +64,6 @@ class BleService {
           tmpNewMat.add(newMat.matrix);
         }
 
-        // var strList = tmpNewMat
-        //     .map((e) =>
-        //         '{"type": "line3D","data": $e,"lineStyle": {"width": 4,"color": "#ff5733"}}')
-        //     .toList();
         var strList = tmpNewMat
             .asMap()
             .entries
