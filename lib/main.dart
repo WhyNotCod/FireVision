@@ -50,8 +50,9 @@ class _FlutterBlueAppState extends State<MyApp> {
         : BluetoothOffScreen(adapterState: _adapterState);
 
     return MaterialApp(
-      color: const Color.fromARGB(255, 137, 17, 6),
-      title: 'FireVisions',
+      color: const Color.fromARGB(255, 255, 255, 255),
+      title: 'FireVISION',
+      theme:new ThemeData(scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255)),
       home: HomeScreen(screen: screen),
       navigatorObservers: [BluetoothAdapterStateObserver()],
     );
@@ -139,17 +140,18 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("FireVision"),
+        title: const Text("FireVISION"),
+        backgroundColor: const Color.fromARGB(255, 137, 17, 6), // Solid color
       ),
       body: Center(
         child: Column(
           children: <Widget>[
-            Container(
-              height: 50, // Adjust the height as needed
-              width:
-                  double.infinity, // Make it span the full width of the screen
-              color: const Color.fromARGB(255, 137, 17, 6), // Solid color
-            ),
+            // Container(
+            //   height: 50, // Adjust the height as needed
+            //   width:
+            //       double.infinity, // Make it span the full width of the screen
+            //   color: const Color.fromARGB(255, 137, 17, 6), // Solid color
+            // ),
             //const Spacer(flex: 1),
             Image.asset('assets/images/logo.png', height: 200, scale: 4),
             ElevatedButton(

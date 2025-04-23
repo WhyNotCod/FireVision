@@ -118,7 +118,7 @@ class _ScanScreenState extends State<ScanScreen> {
     if (FlutterBluePlus.isScanningNow) {
       return FloatingActionButton(
         onPressed: onStopPressed,
-        backgroundColor: Colors.red,
+        backgroundColor: const Color.fromARGB(255, 137, 17, 6), // Solid color
         child: const Icon(Icons.stop),
       );
     } else {
@@ -163,6 +163,7 @@ class _ScanScreenState extends State<ScanScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Find Devices'),
+          backgroundColor: const Color.fromARGB(255, 137, 17, 6), // Solid color
         ),
         body: RefreshIndicator(
           onRefresh: onRefresh,
