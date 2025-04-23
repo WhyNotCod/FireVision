@@ -172,7 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Image.asset(
               'assets/images/house_on_fire.jpg', // Replace with your image path
               height: 100, // Adjust the height as needed
-              scale: 2, // Adjust the scale as needed
+              scale: 1, // Adjust the scale as needed
             ),
           ],
         ),
